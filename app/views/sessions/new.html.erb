@@ -1,0 +1,27 @@
+<% provide(:title, "Iniciar sesion") %>
+
+<div id="header">
+  <div id="info" class="container">
+    <div class="well col-md-4 col-md-offset-4">
+      <h1 class="centered"><strong>Iniciar sesi&oacute;n</strong></h1>
+      <%= form_for(:session, url: sessions_path) do |f| %>
+        <div class="form-group">
+          <%= f.label :email, "Correo electrónico" %>
+          <%= f.email_field :email, class:"form-control" %>
+        </div>
+
+        <div class="form-group">
+          <%= f.label :password, "Contraseña" %>
+          <%= f.password_field :password, class:"form-control" %>
+        </div>
+
+        <div class="form-group centered">
+          <%= f.submit "Iniciar sesion", class: "btn btn-large btn-primary" %>
+        </div>
+
+      <% end %>
+
+      <p>New user? <%= link_to "Sign up now!", signup_path %></p>
+    </div>
+  </div>
+</div>

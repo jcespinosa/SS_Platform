@@ -1,0 +1,30 @@
+<% provide(:title, "Mi perfil") %>
+
+<div class="container" style="margin-top: 10px; margin-bottom: 20px;">
+
+  <div id="sidebar" class="col-md-3">
+    <div id="userSession" class="row well">
+      <div id="userPicture" class="col-md-3">
+        <%= link_to (image_tag "user.png", :width => 64, :height => 64), "#" %><br/>
+      </div>
+      <div id="userData" class="col-md-9" style="padding:10px 0 0 30px;">
+        <%= @user.name %>
+        <small><%= @user.email %></small>
+      </div>
+    </div>
+
+    <ul class="nav nav-pills nav-stacked">
+      <li><a href="#">Opcion 1</a></li>
+      <li><a href="#">Opcion 2</a></li>
+      <li><a href="#">Opcion 3</a></li>
+      <li><a href="#">Opcion 4</a></li>
+      <li><a href="#">Opcion 5</a></li>
+    </ul>
+    
+  </div>
+
+  <div id="mainContainer" class="container col-md-9" style="width: 100px; height: 100px;">
+
+  </div>
+</div>
+

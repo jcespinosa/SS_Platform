@@ -1,0 +1,97 @@
+/*
+ ==================================================
+ Autor: Juan Carlos Espinosa Ceniceros
+ ==================================================
+*/
+
+/*
+ ==================================================
+ Styles for HTML TAGS
+ ==================================================
+*/
+
+body {
+	padding-top: 50px;
+	padding-bottom: 50px;
+}
+
+html, body {
+  height: 100%;
+}
+
+small {
+	color: #999999;
+}
+
+input[type=text] {
+	height: 32px;
+}
+
+/*
+ ==================================================
+ Styles to override BOOTSTRAP CLASSES
+ ==================================================
+*/
+
+.modal-footer{
+	margin: 0;
+}
+
+.panel-body {
+	padding: 0;
+}
+
+/*
+ ==================================================
+ Styles for USER GLOBAL CLASSES
+ ==================================================
+*/
+
+.centered {
+	text-align: center;
+}
+
+.justify {
+	text-align: justify;
+}
+
+.divider {
+	min-height: 40px;
+}
+
+.opaque {
+	background-color: rgba(0, 0, 0, 0.7);
+}
+
+/*
+ ==================================================
+ Styles for USER SPECIFIC CLASSES
+ ==================================================
+*/
+
+/*
+ ==================================================
+ Styles for USER ID's
+ ==================================================
+*/
+
+div#header {
+	background: url(/assets/1.png) 50% 1% fixed;
+	height: 100%;
+}
+
+div#info {
+	background-color: rgba(0,0,0,0.7);
+	height: 100%;
+	padding-top: 40px;
+	color: #000000;
+}
+
+div#sidebar {
+	border-right: 1px solid #e3e3e3
+}
+
+div#mainContainer {
+	background-color: #e3e3e3;
+}
+

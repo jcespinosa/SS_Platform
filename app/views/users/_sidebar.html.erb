@@ -1,0 +1,14 @@
+<div id="sidebar" class="col-md-3 container">
+  <div id="userPicture" class="well centered">
+    <%= link_to (image_tag "user.png", :width => 200, :height => 200), "#" %>
+  </div>
+
+  <hr/>
+
+  <div id="userData">
+    <%= @user.name %>
+    <small><%= @user.email %></small>
+  </div>
+
+  <hr/>
+</div>

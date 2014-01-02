@@ -11,20 +11,26 @@
 */
 
 body {
-	padding-top: 50px;
-	padding-bottom: 50px;
+  padding-top: 50px;
+  padding-bottom: 50px;
 }
 
 html, body {
   height: 100%;
 }
-
+/*
+input[type=text] {
+  height: 32px;
+}
+*/
 small {
-	color: #999999;
+  color: #999999;
 }
 
-input[type=text] {
-	height: 32px;
+ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
 }
 
 /*
@@ -33,12 +39,24 @@ input[type=text] {
  ==================================================
 */
 
+.alert {
+  margin-bottom: 10px;
+}
+
+.btn {
+  margin-right: 5px;
+}
+
 .modal-footer{
-	margin: 0;
+  margin: 0;
+}
+
+.nav-tabs{
+  padding-bottom: 15px;
 }
 
 .panel-body {
-	padding: 0;
+  padding: 15;
 }
 
 /*
@@ -47,20 +65,32 @@ input[type=text] {
  ==================================================
 */
 
-.centered {
-	text-align: center;
+.dBlock {
+  display: block;
 }
 
-.justify {
-	text-align: justify;
+.centered {
+  text-align: center;
 }
 
 .divider {
-	min-height: 40px;
+  min-height: 40px;
+}
+
+.justify {
+  text-align: justify;
 }
 
 .opaque {
-	background-color: rgba(0, 0, 0, 0.7);
+  background-color: rgba(0, 0, 0, 0.7);
+}
+
+.small {
+
+}
+
+.white {
+  color: #ffffff;
 }
 
 /*
@@ -69,6 +99,22 @@ input[type=text] {
  ==================================================
 */
 
+div.mainContainer {
+  padding-top: 30px;
+  min-height: 100%;
+}
+
+div.profileField {
+  border: 2px solid #e8e8e8;
+  padding: 5px;
+  margin-top: 5px;
+}
+
+ul.projects li, ul.users li {
+  padding: 10px 0;
+  border-top: 1px solid #e8e8e8;
+}
+
 /*
  ==================================================
  Styles for USER ID's
@@ -76,21 +122,21 @@ input[type=text] {
 */
 
 div#header {
-	background: url(/assets/1.png) 50% 1% fixed;
-	height: 100%;
+  background: url(/assets/1.png) 50% 1% fixed;
 }
 
 div#info {
-	background-color: rgba(0,0,0,0.7);
-	height: 100%;
-	padding-top: 40px;
-	color: #000000;
+  background-color: rgba(0,0,0,0.7);
+  padding: 40px 0 40px 0;
+  color: #000000;
 }
 
 div#sidebar {
-	border-right: 1px solid #e3e3e3
+  border-right: 1px solid #e3e3e3
 }
 
-div#mainContainer {
+ul#errors {
+  color: #ff0000;
+  font-size: 10px;
+  margin-bottom: 10px;
 }
-

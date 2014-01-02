@@ -1,0 +1,66 @@
+<% provide(:title, 'All users') %>
+
+<script>
+  $(document).ready(function(){
+    paginate();
+    pagination('1');
+    $('.page').click(function(){
+      var id = $(this).attr('id');
+      if($(this).parent().hasClass('active') == false){
+        pagination(id);
+      }
+      return false;
+    });
+  });
+</script>
+
+<div class="container">
+  <h1>All users</h1>
+
+  <% count = 0 %>
+  <% block = 1 %>
+  <% @users.each_with_index do |user, index| %>
+  
+    <% if count == 0 %>
+      <div class="block" id=<%= 'block' + block.to_s %> style="display:none">
+        <ul class="users">
+    <% end %>
+
+    <li>
+      <span class="dBlock name"><%= user.name %></span>
+      <span class="dBlock email"><%= user.email %></span>
+      <span class="dBlock hash"><%= user.user_hash %></span>
+
+      <% if current_user.admin? && !current_user?(user) %>
+        <span class="dBlock delUser">
+          <%= link_to "delete", user, method: :delete, data: { confirm: "Are you sure?" } %>
+        </span>
+      <% end %>
+
+    </li>
+
+    <% count += 1 %>
+
+    <% if count == 5 %>
+        </ul>
+      </div>
+      <% count = 0 %>
+      <% block += 1 %>
+    <% end %>
+  <% end %>
+
+  <div class="centered">
+    <ul class="pagination">
+      <% for i in 1..block%>
+        <% if i == 1 %>
+          <li class="active pages">
+        <% else %>
+          <li class="pages">
+        <% end %>
+          <a class="page" id=<%= (i).to_s %> href="#"><%= (i).to_s %></a>
+        </li>
+      <% end %>
+    </ul>
+  </div>
+
+</div>

@@ -1,4 +1,131 @@
-<% provide(:title, "Home") %>
+<% provide(:title, "El proyecto") %>
 
-<h1>SS_Platform</h1>
-<p>This is the home page for the SS Platform application.</p>
+<div id="header">
+  <div id="info" class="container">
+    <div class="row">
+      <div class="col-md-5 col-md-offset-1 centered white">
+        <h1><strong>Iniciativa</strong></h1>
+        <br/>
+        <p>Desarrollar una plataforma web capaz de realizar diversos an&aacute;lisis estad&iacute;sticos mediante diferentes modelos matem&aacute;ticos para generar indicadores y correlaciones a partir de datos cuantitativos de manera r&aacute;pida y transparente.</p>
+        <p>Asi mismo, ofrecer un espacio interactivo para la visualizaci&oacute;n de resultados por medio de gr&aacute;ficas, tablas y mapas interactivos.</p>
+      </div>
+
+      <div class="col-md-4 col-md-offset-1">
+        <% if signed_in? %>
+          <div class="centered">
+          <%= link_to current_user, class:"btn btn-lg btn-success" do %>
+            <span class="glyphicon glyphicon-user"></span>
+            <strong>Ir a mi cuenta</strong>
+          <% end %>
+        </div>
+        <% else %>
+          <%= render 'users/new_user_form' %>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="divider"></div>
+
+<div class="container">
+  <div class="row">
+    <div class="col-md-6 centered">
+      <div class="jumbotron">
+        <h2>Objetivo</h2>
+        <p>Crear una plataforma web que le permita a los usuarios obtener el mayor provecho
+        de su informaci&oacute;n</p>
+      </div>
+    </div>
+
+    <div class="col-md-6 centered">
+      <div class="jumbotron">
+        <h2>Motivaci&oacute;n</h2>
+        <p>Un sitio donde donde los usuarios compartan informaci&oacute;n de calidad y de inter&eacute;s 
+        general disponible todo el tiempo y al alcance de todos</p>
+      </div>
+    </div>
+  </div>
+  
+  <h1>&#191;C&oacute;mo funciona?</h1>
+  <hr>
+  <div class="row">
+    <div class="col-md-6 centered">
+      <div class="jumbotron">
+        <h2>1. Crea tu perfil</h2>
+        <p>P&uacute;blico o privado, el espacio donde podr&aacute;s organizar y compartir tu informaci&oacute;n</p>
+      </div>
+    </div>
+    <div class="col-md-6 centered">
+      <%= link_to (image_tag "users.png", :width => 230, :height => 230), "#" %>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-md-6 centered">
+      <%= link_to (image_tag "upload.png", :width => 230, :height => 230), "#" %>
+    </div>
+    <div class="col-md-6 centered">
+      <div class="jumbotron">
+        <h2>2. Sube tus archivos</h2>
+        <p>Sube los datos de tu investigaci&oacute;n, se tendr&aacute; soporte para diferentes formatos de archivos.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-md-6 centered">
+      <div class="jumbotron">
+        <h2>3. Procesamiento</h2>
+        <p>El motor interno de la herramienta se encargar&aacute; de procesar la informaci&oacute;n 
+          y de generar los resultados de manera transparente.</p>
+      </div>
+    </div>
+    <div class="col-md-6 centered">
+      <%= link_to (image_tag "processor.png", :width => 230, :height => 230), "#" %>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-md-6 centered">
+      <%= link_to (image_tag "visualization.png", :width => 230, :height => 230), "#" %>
+    </div>
+    <div class="col-md-6 centered">
+      <div class="jumbotron">
+        <h2>4. Visualiza los resultados</h2>
+        <p>La plataforma presentara los resultados del procesamiento mediante gr&aacute;ficas, tablas y mapas interactivos.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-md-6 centered">
+      <div class="jumbotron">
+        <h2>5. Open Data</h2>
+        <p>Comparte tus resultados y contribuye. Conocimiento disponible para todos en todo momento.</p>
+      </div>
+    </div>
+    <div class="col-md-6 centered">
+      <%= link_to (image_tag "cloud.png", :width => 230, :height => 230), "#" %>
+    </div>
+  </div>
+    
+  <h1>&#191;Qui&eacute;nes somos? <small>Conoce al equipo</small></h1>
+  <hr>
+  <div class="row">
+    <div class="col-md-5 col-md-offset-1 centered">
+      <%= link_to (image_tag "elisa.jpg", :width => 150, :height => 220), "#" %>
+      <h2>Satu Elisa Schaeffer</h2>
+      <p><small>Doctor en Ciencias (en Tecnolog&iacute;a) en Ciencia e Ingenier&iacute;a de la Computaci&oacute;n</small></p>
+      <p>Profesor investigador en la FIME de la UANL</p>
+      <p>Coordinador de C&oacute;mputo Cient&iacute;fico en el CIIDIT de la UANL</p>
+    </div>
+    <div class="col-md-5 centered">
+      <%= link_to (image_tag "circle.png", :width => 150, :height => 220), "#" %>
+      <h2>Juan Carlos E. Ceniceros</h2>
+      <p>Estudiante de noveno semestre de la carrera</p>
+      <p>Ingeniero en Tecnolog&iacute;a de Software</p>
+      <p>FIME - UANL</p>
+    </div>
+  </div>
+</div>

@@ -3,6 +3,7 @@ class User < ActiveRecord::Base
 
   before_save { self.email = email.downcase }
   before_create :create_remember_token
+  before_create :create_user_hash
 
   validates :name,
             presence: true, 
@@ -10,6 +11,14 @@ class User < ActiveRecord::Base
 
   #EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i
   EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-]+(\.[a-z]+)*\.[a-z]+\z/i
+  USERNAME_REGEX = /\A(?![_. ])(?!.*[_. ]{2})[a-zA-Z0-9._-]+(?<![_. ])+\z/
+
+  validates :username,
+            presence: true,
+            format: { with: USERNAME_REGEX },
+            uniqueness: true,
+            length: { minimum: 6, maximum: 18 }
+
   validates :email,
             presence: true,
             format: { with: EMAIL_REGEX },
@@ -17,10 +26,11 @@ class User < ActiveRecord::Base
 
   has_secure_password
   validates :password,
-            length: { minimum: 6 }
+            length: { minimum: 6 },
+            if: :password
 
-  def User.new_remember_token
-    SecureRandom.urlsafe_base64
+  def User.new_token(length)
+    SecureRandom.urlsafe_base64(length)
   end
 
   def User.encrypt(token)
@@ -29,7 +39,14 @@ class User < ActiveRecord::Base
 
   private
     def create_remember_token
-      self.remember_token = User.encrypt(User.new_remember_token)
+      self.remember_token = User.encrypt(User.new_token(16))
+    end
+
+    def create_user_hash
+      self.user_hash = User.new_token(8)
+      path = "#{Rails.root}/tmp/users/#{self.user_hash}/tmp.tmp"
+      dir = File.dirname(path)
+      FileUtils.mkdir_p(dir) unless File.directory?(dir)
     end
 
 end

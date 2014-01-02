@@ -1,11 +1,87 @@
 <% provide(:title, 'All users') %>
-<h1>All users</h1>
 
-<ul class="users">
-  <% @users.each do |user| %>
-    <li>
-      <% if current_user.admin? && !current_user?(user) %>
-        <%= link_to "delete", user, method: :delete, data: { confirm: "You sure?" } %>
-    </li>
-  <% end %>
-</ul>
+<script>
+
+  function paginate(){
+    var count = 0;
+    var block = 1;
+    var html = "";
+
+    var users = {
+      <% @users.each_with_index do |user, index| %>
+        <% i = index + 1%>
+        <%= i %>: {
+          name: '<%= user.name %>',
+          username: '<%= user.username %>',
+          email: '<%= user.email %>',
+          hash: '<%= user.user_hash %>',
+          del: '<% if current_user.admin? && !current_user?(user) %><span class="dBlock delete"><%= link_to "delete", user, method: :delete, data: { confirm: "Are you sure?" } %></span>\n<% end %>'
+        },
+      <% end %>
+    }
+
+    $.each(users, function(index, user){
+      if(count == 0){
+        html += '<div class="block" id="block' + block + '" style="display:none">\n';
+        html += '  <ul class="users">\n';
+      }
+
+      html += '    <li>\n';
+      html += '      <span class="dBlock name">' + user.name + '</span>\n';
+      html += '      <span class="dBlock name">' + user.username + '</span>\n';
+      html += '      <span class="dBlock hash">' + user.hash + '</span>\n';
+      html += '      ' + user.del + '';
+
+      html += '    </li>\n';
+      count += 1;
+
+      if(count == 5 || index == Object.keys(users).length){
+        if(index < Object.keys(users).length){
+          count = 0;
+          block += 1;
+        }
+        html += '  </ul>\n';  
+        html += '</div>\n';
+      }
+    });
+
+    html += '<div class="centered">\n';
+    html += '  <ul class="pagination">\n';
+
+    for(var i=1; i<= block; i++){
+      if(i == 1){
+        html += '    <li class="active pages">\n';
+      } else {
+        html += '    <li class="pages">\n';
+      }
+      html += '      <a class="page" id="' + i + '" href="#">' + i + '</a>\n';
+      html += '    </li>\n';
+    }
+
+    html += '  </ul>\n';
+    html += '</div>\n';
+
+    $('#usersPagination').html(html);
+
+    return;
+  }
+
+  $(document).ready(function(){
+    paginate();
+    pagination('1');
+    $('.page').click(function(){
+      var id = $(this).attr('id');
+      if($(this).parent().hasClass('active') == false){
+        pagination(id);
+      }
+      return false;
+    });
+  });
+</script>
+
+<div class="mainContainer container">
+  <h1>All users</h1>
+
+  <div id="usersPagination"></div>
+
+</div>

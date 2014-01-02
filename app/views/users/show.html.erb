@@ -1,10 +1,10 @@
 <% provide(:title, "Mi perfil") %>
 
-<div class="container" style="margin-top: 20px; margin-bottom: 20px;">
+<div class="mainContainer container">
 
   <%= render 'users/sidebar' %>
 
-  <div id="mainContainer" class="col-md-9 container">
+  <div class="col-md-9 container">
     <ul class="nav nav-tabs nav-justified">
       <li class="active">
         <%= link_to current_user do %>
@@ -13,12 +13,67 @@
         <% end %>
       </li>
       <li>
-        <%= link_to "#" do %>
+        <%= link_to projects_user_path do %>
           <span class="glyphicon glyphicon-list"></span>
-          Proyectos
+          <strong>Proyectos</strong>
         <% end %>
       </li>
     </ul>
+
+    <div class="tab-content">
+      <form class="form-horizontal">
+        <div class="form-group">
+          <label for="about" class="col-sm-3 control-label">Acerca de mí: </label>
+          <div class="col-sm-9 profileField">
+            <% if @user.about? %>
+              <span><%= @user.about %></span>
+            <% else %>
+              <span class="text-muted">Acerca de m&iacute;</span>
+            <% end %>
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="speciality" class="col-sm-3 control-label">Especialidad: </label>
+          <div class="col-sm-5 profileField">
+            <% if @user.speciality? %>
+              <span><%= @user.speciality %></span>
+            <% else %>
+              <span class="text-muted">Estudi&eacute; la carrera de ...</span>
+            <% end %>
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="job" class="col-sm-3 control-label">Ocupación: </label>
+          <div class="col-sm-5 profileField">
+            <% if @user.job? %>
+              <span><%= @user.job %></span>
+            <% else %>
+              <span class="text-muted">Me dedico a ...</span>
+            <% end %>
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="workplace" class="col-sm-3 control-label">Lugar de trabajo o estudio: </label>
+          <div class="col-sm-5 profileField">
+            <% if @user.workplace? %>
+              <span><%= @user.workplace %></span>
+            <% else %>
+              <span class="text-muted">Trabajo / estudio en ...</span>
+            <% end %>
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="degree" class="col-sm-3 control-label">Estudios: </label>
+          <div class="col-sm-5 profileField">
+            <% if @user.degree? %>
+              <span><%= @user.degree %></span>
+            <% else %>
+              <span class="text-muted">Mi &uacute;ltimo grado de estudios fue ...</span>
+            <% end %>
+          </div>
+        </div>
+      </form>
+    </div>
   </div>
 </div>
 

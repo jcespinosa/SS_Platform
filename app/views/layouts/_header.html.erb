@@ -1,3 +1,31 @@
+<script>
+  $(document).ready(function(){
+    $('a#new_project').tooltip({
+      title: 'Crear nuevo proyecto',
+      placement: 'bottom',
+      trigger: 'hover'
+    });
+
+    $('a#edit_user').tooltip({
+      title: 'Editar mi perfil',
+      placement: 'bottom',
+      trigger: 'hover'
+    });
+
+    $('a#signout').tooltip({
+      title: 'Cerrar sesion',
+      placement: 'bottom',
+      trigger: 'hover'
+    });
+
+    $('a#all_users').tooltip({
+      title: 'Ver todos los usuarios',
+      placement: 'bottom',
+      trigger: 'hover'
+    });
+  });
+</script>
+
 <div class="navbar navbar-default navbar-fixed-top">
   <div class="container">
     <div class="navbar-header">
@@ -8,33 +36,41 @@
       </button>
       <a class="navbar-brand" href="#">...</a>
     </div>
+
     <div class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
-        <li><%= link_to "Home", 'http://localhost/ss/' %></li>
+        <li><%= link_to 'Inicio', root_path %></li>
       </ul>
       <ul class="nav navbar-nav pull-right">
         <% if signed_in? %>
           <li>
             <%= link_to current_user do %>
               <span class="glyphicon glyphicon-user"></span>
-              <strong><%= current_user.email %></strong>
+              <strong><%= current_user.username %></strong>
             <% end %>
           </li>
           <li>
-            <%= link_to "#" do %>
+            <%= link_to new_project_path, :id => 'new_project'  do %>
               <span class="glyphicon glyphicon-folder-open"></span>
             <% end %>
           </li>
           <li>
-            <%= link_to edit_user_path(current_user) do %>
+            <%= link_to edit_user_path(current_user), :id => 'edit_user' do %>
               <span class="glyphicon glyphicon-cog"></span>
             <% end %>
           </li>
           <li>
-            <%= link_to signout_path, method: "delete" do %>
+            <%= link_to signout_path, method: 'delete', :id => 'signout' do %>
               <span class="glyphicon glyphicon-log-out"></span>
             <% end %>
           </li>
+          <% if current_user.admin? %>
+            <li>
+              <%= link_to users_path, :id => 'all_users' do %>
+                <span class="glyphicon glyphicon-list"></span>
+              <% end %>
+          </li>
+          <% end %>
         <% else %>
           <li>
             <%= link_to signin_path do %>

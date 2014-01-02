@@ -1,0 +1,95 @@
+<% provide(:title, "Mis proyectos") %>
+
+<script>
+  $(document).ready(function(){
+    pagination('1');
+    $('.page').click(function(){
+      var id = $(this).attr('id');
+      if($(this).parent().hasClass('active') == false){
+        pagination(id);
+      }
+      /*return false;*/
+    });
+  });
+</script>
+
+<div class="mainContainer container">
+  <%= render 'users/sidebar' %>
+
+  <div class="col-md-9 container">
+    <ul class="nav nav-tabs nav-justified">
+      <li>
+        <%= link_to current_user do %>
+          <span class="glyphicon glyphicon-user"></span>
+          <strong>Perfil</strong>
+        <% end %>
+      </li>
+      <li class="active">
+        <%= link_to projects_user_path do %>
+          <span class="glyphicon glyphicon-list"></span>
+          <strong>Proyectos</strong>
+        <% end %>
+      </li>
+    </ul>
+
+    <div class="tab-content">
+      <div class="tab-pane active">
+      <% if @user.projects.any? %>
+        <h4><strong>Proyectos (<%= @user.projects.count %>)</strong></h4>
+
+        <% count = 0 %>
+        <% block = 1 %>
+        <% @projects.each_with_index do |project, index| %>
+          <% if count == 0 %>
+            <div class="block" id=<%= 'block' + block.to_s %> style="display:none">
+              <ul id="projects">
+          <% end %>
+
+          <li>
+            <span class="dBlock name"><strong><%= link_to project.name, project %></strong></span>
+            <span class="dBlock description"><%= truncate(project.description, length: 50) %></span>
+            <span class="dBlock timestamp"><small class="text-muted">Created: <%= time_tag(project.created_at) %></small></span>
+          </li>
+
+          <% count += 1 %>
+
+          <% if count == 5 %>
+              </ul>
+            </div>
+            <% count = 0 %>
+            <% block += 1 %>
+          <% end %>
+
+        <% end %>
+
+          </ul>
+        </div>
+            
+        <div class="centered">
+          <ul class="pagination">
+            <% for i in 1..block%>
+              <% if i == 1 %>
+                <li class="active pages">
+              <% else %>
+                <li class="pages">
+              <% end %>
+                <a class="page" id=<%= (i).to_s %> href="#"><%= (i).to_s %></a>
+              </li>
+            <% end %>
+          </ul>
+        </div>
+
+      <% else %>
+        <h4>
+          <%= link_to new_project_path, :id => 'new_project'  do %>
+            <span class="glyphicon glyphicon-folder-open"></span>
+            Crear mi primer proyecto
+          <% end %>
+        </h4>
+      <% end %>
+
+      </div>
+    </div>
+  </div>
+</div>
+</div>

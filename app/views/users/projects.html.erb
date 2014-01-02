@@ -1,0 +1,126 @@
+<% provide(:title, "Mis proyectos") %>
+
+<script>
+  function paginate(){
+    var count = 0;
+    var block = 1;
+    var html = "";
+
+    <% if @user.projects.any? %>
+    var projects = {
+      <% @projects.each_with_index do |project, index| %>
+        <% i = index + 1%>
+        <%= i %>: {
+          name: '<%= link_to project.name, project %>',
+          description: '<%= truncate(project.description, length: 50) %>',
+          timestamp: '<%= time_tag(project.created_at) %>'
+        },
+      <% end %>
+    }
+
+    $("#myProjects").text('(' + Object.keys(projects).length + ')');
+
+    $.each(projects, function(index, project){
+      if(count == 0){
+        html += '<div class="block" id="block' + block + '" style="display:none">\n';
+        html += '  <ul class="projects">\n';
+      }
+
+      html += '    <li>\n';
+      html += '      <span class="dBlock name">' + project.name + '</span>\n';
+      html += '      <span class="dBlock description">' + project.description + '</span>\n';
+      html += '      <span class="dBlock timestamp text-muted">' + project.timestamp + '</span>\n';
+      html += '    </li>\n';
+      count += 1;
+
+      if(count == 5 || index == Object.keys(projects).length){
+        if(index < Object.keys(projects).length){
+          count = 0;
+          block += 1;
+        }
+        html += '  </ul>\n';  
+        html += '</div>\n';
+      }
+    });
+
+    html += '<div class="centered">\n';
+    html += '  <ul class="pagination">\n';
+
+    for(var i=1; i<= block; i++){
+      if(i == 1){
+        html += '    <li class="active pages">\n';
+      } else {
+        html += '    <li class="pages">\n';
+      }
+      html += '      <a class="page" id="' + i + '" href="#">' + i + '</a>\n';
+      html += '    </li>\n';
+    }
+
+    html += '  </ul>\n';
+    html += '</div>\n';
+
+    <% else %>
+
+    $("#myProjects").text('(0)');
+    html += '<%= link_to new_project_path, class:"btn btn-lg btn-success" do %><span class="glyphicon glyphicon-folder-open"></span><strong>&nbsp;&nbsp;&nbsp;Crear mi primer proyecto</strong>\n<% end %>';
+
+    <% end %>
+
+    $('#projectsPagination').html(html);
+    console.log(html);
+
+    return;
+  }
+
+  $(document).ready(function(){
+    paginate();
+    pagination('1');
+    $('.page').click(function(){
+      var id = $(this).attr('id');
+      if($(this).parent().hasClass('active') == false){
+        pagination(id);
+      }
+      /*return false;*/
+    });
+  });
+</script>
+
+<div class="mainContainer container">
+  <%= render 'users/sidebar' %>
+
+  <div class="col-md-9 container">
+    <ul class="nav nav-tabs nav-justified">
+      <li>
+        <%= link_to current_user do %>
+          <span class="glyphicon glyphicon-user"></span>
+          <strong>Perfil</strong>
+        <% end %>
+      </li>
+      <li class="active">
+        <%= link_to projects_user_path do %>
+          <span class="glyphicon glyphicon-list"></span>
+          <strong>Proyectos</strong>
+        <% end %>
+      </li>
+    </ul>
+
+    <div class="tab-content row">
+      <div class="col-md-6">
+        <div class="panel panel-primary">
+          <div class="panel-heading">
+            <strong>Mis proyectos <span id="myProjects" class="text-muted"></span></strong>
+          </div>
+          <div id="projectsPagination" class="panel-body"></div>
+        </div>
+      </div>
+      <div class="col-md-6">
+        <div class="panel panel-primary">
+          <div class="panel-heading">
+            <strong>Contribuciones <span id="myContributions" class="text-muted">(0)</span></strong>
+          </div>
+          <div class="panel-body"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

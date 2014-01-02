@@ -1,0 +1,69 @@
+<% provide(:title, @project.name) %>
+
+<script>
+  $(document).ready(function(){
+    $('a#delete_project').tooltip({
+      title: 'Eliminar proyecto',
+      placement: 'bottom',
+      trigger: 'hover'
+    });
+
+    $('a#edit_project').tooltip({
+      title: 'Editar información del proyecto',
+      placement: 'bottom',
+      trigger: 'hover'
+    });
+  });
+</script>
+
+<div class="mainContainer container">
+  <h4>
+    <%= link_to current_user.email, projects_user_path(current_user) %> / <strong><%= @project.name %></strong>
+    <%= link_to @project, method: :delete, data: { confirm: "¿Estas seguro de eliminar éste proyecto?" }, :id => 'delete_project', class:"btn btn-sm btn-danger pull-right" do %>
+      <span class="glyphicon glyphicon-trash"></span>
+    <% end %>
+    <%= link_to edit_project_path(@project), :id => 'edit_project', class:"btn btn-sm btn-default pull-right" do %>
+      <span class="glyphicon glyphicon-pencil"></span>
+    <% end %>
+  </h4>
+  <hr>
+
+  <p>
+    <strong><%= truncate(@project.description, length: 100) %></strong>
+  </p>
+
+  <hr>
+
+  <div class="row">
+    <div class="col-md-2" style="border-right: solid 1px #ecf0f1">
+      <ul class="nav nav-pills nav-stacked">
+        <li class="active">
+          <%= link_to @project do %>
+            <span class="glyphicon glyphicon-folder-open"></span>
+            <strong>Archivos</strong>
+          <% end %>
+        </li>
+        <li>
+          <%= link_to "#" do %>
+            <span class="glyphicon glyphicon-tasks"></span>
+            <strong>Parametros</strong>
+          <% end %>
+        </li>
+        <li>
+          <%= link_to "#" do %>
+            <span class="glyphicon glyphicon-ok"></span>
+            <strong>Resultados</strong>
+          <% end %>
+        </li>
+      </ul>
+    </div>
+    <div class="col-md-10 tab-content active">
+      <p>Hola mundo</p>
+    </div>
+  </div>
+
+  <hr>
+
+</div>
+
+

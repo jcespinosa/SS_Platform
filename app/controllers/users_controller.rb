@@ -8,13 +8,12 @@ class UsersController < ApplicationController
   end
 
   def create
-    @user = User.new(user_params)    # Not the final implementation!
+    @user = User.new(new_user_params)    # Not the final implementation!
     if @user.save
       sign_in @user
-      flash[:success] = "Welcome!"
       redirect_to @user
     else
-      render "new"
+      render 'new'
     end
   end
 
@@ -32,8 +31,8 @@ class UsersController < ApplicationController
 
   def update
     #@user = User.find(params[:id])
-    if @user.update_attributes(user_params)
-      flash[:success] = "Profile updated"
+    if @user.update_attributes(edit_user_params)
+      flash[:success] = 'Perfil actualizado correctamente'
       redirect_to @user
     else
       render 'edit'
@@ -41,14 +40,27 @@ class UsersController < ApplicationController
   end
 
   def destroy
+    @user = User.find(params[:id])
+    path = "#{Rails.root}/tmp/users/#{@user.user_hash}/tmp.tmp"
+    dir = File.dirname(path)
+    FileUtils.rm_rf(dir)
     User.find(params[:id]).destroy
-    flash[:success] = "User deleted."
+    flash[:success] = dir
     redirect_to users_url
   end
 
+  def projects
+    @user = User.find(params[:id])
+    @projects = @user.projects
+  end
+
   private
-    def user_params
-      params.require(:user).permit(:name, :email, :password, :password_confirmation)
+    def new_user_params
+      params.require(:user).permit(:name, :email, :username, :password, :password_confirmation)
+    end
+
+    def edit_user_params
+      params.require(:user).permit(:email, :speciality, :job, :workplace, :about, :password, :password_confirmation)
     end
 
     def correct_user

@@ -1,2 +1,0 @@
-class ProjectFileController < ApplicationController
-end

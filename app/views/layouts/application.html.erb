@@ -2,8 +2,8 @@
 <html>
   <head>
     <title><%= yield(:title) %></title>
-    <%= stylesheet_link_tag "application", media: "all", "data-turbolinks-track" => true %>
-    <%= javascript_include_tag "application", "data-turbolinks-track" => true %>
+    <%= stylesheet_link_tag "application", media: "all" %>
+    <%= javascript_include_tag "application" %>
     <%= csrf_meta_tags %>
   </head>
 
@@ -11,12 +11,20 @@
 
     <%= render 'layouts/header' %>
 
-    <div class="container">
+    <script>
+      toastr.options = {
+        "positionClass": "toast-bottom-full-width",
+        "showDuration": "300",
+        "hideDuration": "1000",
+        "timeOut": "5000",
+        "extendedTimeOut": "1000",
+        "showMethod": "slideDown",
+        "hideMethod": "slideUp"
+      }
       <% flash.each do |key, value| %>
-        <%= content_tag(:div, value, class: "alert alert-#{key}") %>
-        <!--#<div class="alert alert-<%= key %>"><%= value %></div>-->
+      toastr.<%= key %>('<%= value %>');
       <% end %>
-    </div>
+    </script>
 
     <%= yield %>
   

@@ -1,0 +1,47 @@
+<script>
+  $(document).ready(function(){
+    $('span.label-default').tooltip({
+      title: 'El proyecto acaba de ser creado y no contiene archivos ni parámetros para su procesamiento',
+      placement: 'right',
+      trigger: 'hover'
+    });
+
+    $('span.label-info').tooltip({
+      title: 'El proyecto se esta configurando y se estan subiendo los archivos para procesarlo',
+      placement: 'right',
+      trigger: 'hover'
+    });
+
+    $('span.label-primary').tooltip({
+      title: 'El proyecto se esta procesando',
+      placement: 'right',
+      trigger: 'hover'
+    });
+
+    $('span.label-default').tooltip({
+      title: 'Hubo un error al procesar el proyecto',
+      placement: 'right',
+      trigger: 'hover'
+    });
+
+    $('span.label-success').tooltip({
+      title: 'El proyecto fue procesado exitosamente, puedes ver los resultados',
+      placement: 'right',
+      trigger: 'hover'
+    });
+  });
+</script>
+
+<% if @project.status == "Nuevo" %>
+  <span class="label label-default">Nuevo</span>
+<% elsif @project.status == "En construcción" %>
+  <span class="label label-info">En construccion</span>
+<% elsif @project.status == "Procesando" %>
+  <span class="label label-primary">Procesando</span>
+<% elsif @project.status == "Error" %>
+  <span class="label label-danger">Error</span>
+<% elsif @project.status == "Terminado" %>
+  <span class="label label-success">Terminado</span>
+<% else %>
+  <span class="label label-default">...</span>
+<% end %>

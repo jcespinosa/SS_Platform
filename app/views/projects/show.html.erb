@@ -26,10 +26,17 @@
       <span class="glyphicon glyphicon-pencil"></span>
     <% end %>
   </h4>
+
   <hr>
 
   <p>
-    <strong><%= truncate(@project.description, length: 100) %></strong>
+    <%= truncate(@project.description, length: 100) %>
+  </p>
+
+  <hr>
+
+  <p>
+    <strong>Status: </strong><%= render 'projects/status' %>
   </p>
 
   <hr>

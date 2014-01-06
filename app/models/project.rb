@@ -30,7 +30,7 @@ class Project < ActiveRecord::Base
     end
 
     def set_project_status
-      self.status = "New"
+      self.status = "Nuevo"
       self.progress = 0
     end
 end

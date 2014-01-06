@@ -60,7 +60,7 @@ class UsersController < ApplicationController
     end
 
     def edit_user_params
-      params.require(:user).permit(:email, :speciality, :job, :workplace, :about, :password, :password_confirmation)
+      params.require(:user).permit(:email, :speciality, :job, :workplace, :about, :degree, :password, :password_confirmation)
     end
 
     def correct_user

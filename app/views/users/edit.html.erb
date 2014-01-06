@@ -34,6 +34,12 @@
             </div>
           </div>
           <div class="form-group">
+            <%= f.label :degree, "Estudios: ", class: 'col-sm-4 control-label' %>
+            <div class="col-sm-7">
+              <%= f.select(:degree, options_for_select([['Preparatoria', 'Preparatoria'], ['Técnico', 'Técnico'], ['Licenciatura', 'Licenciatura'], ['Maestría', 'Maestría'], ['Doctorado', 'Doctorado']], 1)) %>
+            </div>
+          </div>
+          <div class="form-group">
             <%= f.label :speciality, "Especialidad: ", class: 'col-sm-4 control-label' %>
             <div class="col-sm-7">
               <%= f.text_field :speciality, class:"form-control", placeholder:"Estudié la carrera de ..." %>

@@ -13,7 +13,8 @@
         <%= i %>: {
           name: '<%= link_to project.name, project %>',
           description: '<%= truncate(project.description, length: 50) %>',
-          timestamp: '<%= time_tag(project.created_at) %>'
+          timestamp: '<%= time_tag(project.created_at) %>',
+          status: '<%= project.status %>'
         },
       <% end %>
     }

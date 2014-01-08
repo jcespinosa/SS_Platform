@@ -13,16 +13,28 @@
       placement: 'bottom',
       trigger: 'hover'
     });
+
+    $('a.delete_file').tooltip({
+      title: 'Eliminar archivo',
+      placement: 'bottom',
+      trigger: 'hover'
+    });
+
+    $('a.edit_file').tooltip({
+      title: 'Editar información del archivo',
+      placement: 'bottom',
+      trigger: 'hover'
+    });
   });
 </script>
 
 <div class="mainContainer container">
   <h4>
     <%= link_to current_user.email, projects_user_path(current_user) %> / <strong><%= @project.name %></strong>
-    <%= link_to @project, method: :delete, data: { confirm: "¿Estas seguro de eliminar éste proyecto?" }, :id => 'delete_project', class:"btn btn-sm btn-danger pull-right" do %>
+    <%= link_to @project, method: :delete, data: { confirm: "¿Estas seguro de eliminar éste proyecto?" }, :id => 'delete_project', class:"btn btn-xs btn-danger pull-right" do %>
       <span class="glyphicon glyphicon-trash"></span>
     <% end %>
-    <%= link_to edit_project_path(@project), :id => 'edit_project', class:"btn btn-sm btn-default pull-right" do %>
+    <%= link_to edit_project_path(@project), :id => 'edit_project', class:"btn btn-xs btn-default pull-right" do %>
       <span class="glyphicon glyphicon-pencil"></span>
     <% end %>
   </h4>
@@ -65,12 +77,42 @@
       </ul>
     </div>
     <div class="col-md-10 tab-content active">
-      <p>Hola mundo</p>
+
+      <%= link_to upload_path(@project), class:"btn btn-sm btn-default" do %>
+        <span class="glyphicon glyphicon-cloud-upload"></span>
+        Subir archivo
+      <% end %>
+
+      <hr/>
+
+      <% if @project_files.any? %>
+        <table class="table table-condensed table-hover">
+          <tr>
+            <th>ID</th>
+            <th>Nombre</th>
+            <th>Descripci&oacute;n</th>
+            <th class="centered">Acciones</th>
+          </tr>
+        <% @project_files.each_with_index do |file, index| %>
+          <tr>
+            <td><%= index+1 %></td>
+            <td><%= file.name %></td>
+            <td><%= truncate(file.description, length: 50) %></td>
+            <td class="centered">
+              <%= link_to edit_project_file_path(file), class:"btn btn-xs btn-default edit_file" do %>
+                <span class="glyphicon glyphicon-pencil"></span>
+              <% end %>
+              <%= link_to file, method: :delete, data: { confirm: "¿Estas seguro de eliminar éste archivo?" }, class:"btn btn-xs btn-danger delete_file" do %>
+                <span class="glyphicon glyphicon-trash"></span>
+              <% end %>
+            </td>
+          </tr>
+        <% end %>
+        </table>
+      <% end %>
     </div>
   </div>
-
-  <hr>
-
+  <hr/>
 </div>
 
 

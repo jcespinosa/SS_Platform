@@ -7,7 +7,7 @@ gem 'rails', '4.0.1'
 gem 'bcrypt-ruby', '3.1.2'
 
 # Use paperclip to file management
-gem 'paperclip', '~> 3.1'
+gem 'paperclip', :git => 'git://github.com/thoughtbot/paperclip.git'
 
 # Use faker to generate fake users and projects for testing
 gem 'faker', '1.1.2'

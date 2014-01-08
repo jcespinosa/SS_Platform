@@ -7,15 +7,20 @@ SSPlatform::Application.routes.draw do
 
   resources :sessions, only: [:new, :create, :destroy]
   resources :projects, only: [:show, :edit, :new, :update, :create, :destroy]
+  resources :project_files, only: [:create, :edit, :update, :destroy]
 
   root  'static#home'
   #root 'sessions#new'
-  match '/help', to: 'static#help', via: 'get'
-  match '/about', to: 'static#about', via: 'get'
+  match '/help',    to: 'static#help',    via: 'get'
+  match '/about',   to: 'static#about',   via: 'get'
   match '/contact', to: 'static#contact', via: 'get'
+
   match '/signup', to: 'users#new', via: 'get'
-  match '/signin', to: 'sessions#new', via: 'get'
+
+  match '/signin',  to: 'sessions#new',     via: 'get'
   match '/signout', to: 'sessions#destroy', via: 'delete'
+
+  match '/upload/:project_id', to: 'project_files#new', via: 'get', as: 'upload'
 
   #get 'static/home'
   #get 'static/help'

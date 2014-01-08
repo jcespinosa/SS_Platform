@@ -10,6 +10,7 @@ class UsersController < ApplicationController
   def create
     @user = User.new(new_user_params)    # Not the final implementation!
     if @user.save
+      create_user
       sign_in @user
       redirect_to @user
     else
@@ -41,11 +42,11 @@ class UsersController < ApplicationController
 
   def destroy
     @user = User.find(params[:id])
-    path = "#{Rails.root}/tmp/users/#{@user.user_hash}/tmp.tmp"
-    dir = File.dirname(path)
-    FileUtils.rm_rf(dir)
-    User.find(params[:id]).destroy
-    flash[:success] = dir
+    path = File.path("#{Rails.root}/tmp/users/#{@user.user_hash}/")
+    FileUtils.rm_rf(path)
+    flash[:success] = "Se eliminó el usuario #{@user.name}"
+    flash[:warning] = "#{path}"
+    @user.destroy
     redirect_to users_url
   end
 
@@ -70,5 +71,11 @@ class UsersController < ApplicationController
 
     def admin_user
       redirect_to(root_url) unless current_user.admin?
+    end
+
+    def create_user
+      path = File.path("#{Rails.root}/tmp/users/#{@user.user_hash}/")
+      FileUtils.mkdir_p(path) unless File.exists?(path)
+      flash[:info] = "#{path}"
     end
 end

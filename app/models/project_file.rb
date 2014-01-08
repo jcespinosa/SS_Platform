@@ -1,5 +1,6 @@
 class ProjectFile < ActiveRecord::Base
   belongs_to :project
+  has_attached_file :attachment
   default_scope -> { order('created_at DESC') }
   before_create :create_file_hash
 
@@ -9,19 +10,20 @@ class ProjectFile < ActiveRecord::Base
 
   validates :description,
             presence: true, 
-            length: { maximum: 256 }
+            length: { maximum: 300 }
+
+  validates :project_id, 
+            presence: true
+
+  validates_attachment_presence :attachment
 
   def ProjectFile.new_hash
     SecureRandom.urlsafe_base64(8)
   end
 
   private
-    def create_project_hash
+    def create_file_hash
       self.file_hash = ProjectFile.new_hash
-
-      path = "#{Rails.root}/tmp/users/#{user.user_hash}/#{self.project_hash}/tmp.tmp"
-      dir = File.dirname(path)
-
     end
 
 end

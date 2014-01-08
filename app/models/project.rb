@@ -23,10 +23,8 @@ class Project < ActiveRecord::Base
   private
     def create_project_hash
       self.project_hash = Project.new_hash
-
-      path = "#{Rails.root}/tmp/users/#{user.user_hash}/#{self.project_hash}/tmp.tmp"
-      dir = File.dirname(path)
-      FileUtils.mkdir_p(dir) unless File.directory?(dir)
+      path = File.path("#{Rails.root}/tmp/users/#{user.user_hash}/#{self.project_hash}/")
+      FileUtils.mkdir_p(path) unless File.exists?(path)
     end
 
     def set_project_status

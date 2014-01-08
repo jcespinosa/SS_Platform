@@ -44,9 +44,8 @@ class User < ActiveRecord::Base
 
     def create_user_hash
       self.user_hash = User.new_token(8)
-      path = "#{Rails.root}/tmp/users/#{self.user_hash}/tmp.tmp"
-      dir = File.dirname(path)
-      FileUtils.mkdir_p(dir) unless File.directory?(dir)
+      path = File.path("#{Rails.root}/tmp/users/#{self.user_hash}/")
+      FileUtils.mkdir_p(path) unless File.exists?(path)
     end
 
 end

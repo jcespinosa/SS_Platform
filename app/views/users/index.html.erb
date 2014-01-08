@@ -15,7 +15,7 @@
           username: '<%= user.username %>',
           email: '<%= user.email %>',
           hash: '<%= user.user_hash %>',
-          del: '<% if current_user.admin? && !current_user?(user) %><span class="dBlock delete"><%= link_to "delete", user, method: :delete, data: { confirm: "Are you sure?" } %></span>\n<% end %>'
+          del: '<% if current_user.admin? && !current_user?(user) %><span class="dBlock delete"><%= link_to "delete", user, method: :delete, data: { confirm: "¿Estas seguro de eliminar éste usuario?" } %></span>\n<% end %>'
         },
       <% end %>
     }

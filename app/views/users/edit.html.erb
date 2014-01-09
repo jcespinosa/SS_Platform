@@ -1,11 +1,11 @@
-<% provide(:title, "Editar perfil") %>
+<% provide(:title, 'Editar perfil') %>
 
 <script>
   $(document).ready(function(){
-    updateWordsCounter("#about_user", 300, "#wordsCounter");
+    updateWordsCounter('#about_user', 300, '#wordsCounter');
 
-    $("#about_user").keyup(function(){
-      updateWordsCounter("#about_user", 300, "#wordsCounter");
+    $('#about_user').keyup(function(){
+      updateWordsCounter('#about_user', 300, '#wordsCounter');
       return false;
     });    
   });
@@ -19,56 +19,56 @@
           <strong>Editar informaci&oacute;n de perfil</strong>
         </div>
         <div class="panel-body">
-        <%= form_for(@user, :html => { :class => "form form-horizontal"}) do |f| %>
+        <%= form_for(@user, :html => { :class => 'form form-horizontal'}) do |f| %>
           <%= render 'shared/error_messages', object: f.object %>
           <div class="form-group">
-            <%= f.label :name, "Nombre: ", class: 'col-sm-4 control-label' %>
+            <%= f.label :name, 'Nombre: ', class: 'col-sm-4 control-label' %>
             <div class="col-sm-7">
-              <%= f.text_field :name, class:"form-control", disabled: "disabled" %>
+              <%= f.text_field :name, class:"form-control", disabled: 'disabled' %>
             </div>
           </div>
           <div class="form-group">
-            <%= f.label :email, "Correo: ", class: 'col-sm-4 control-label' %>
+            <%= f.label :email, 'Correo: ', class: 'col-sm-4 control-label' %>
             <div class="col-sm-7">
-              <%= f.email_field :email, class:"form-control", placeholder:"Mi correo electrónico es ..." %>
+              <%= f.email_field :email, class:"form-control", placeholder:'Mi correo electrónico es ...' %>
             </div>
           </div>
           <div class="form-group">
-            <%= f.label :degree, "Estudios: ", class: 'col-sm-4 control-label' %>
+            <%= f.label :degree, 'Estudios: ', class: 'col-sm-4 control-label' %>
             <div class="col-sm-7">
               <%= f.select(:degree, options_for_select([['Preparatoria', 'Preparatoria'], ['Técnico', 'Técnico'], ['Licenciatura', 'Licenciatura'], ['Maestría', 'Maestría'], ['Doctorado', 'Doctorado']], 1)) %>
             </div>
           </div>
           <div class="form-group">
-            <%= f.label :speciality, "Especialidad: ", class: 'col-sm-4 control-label' %>
+            <%= f.label :speciality, 'Especialidad: ', class: 'col-sm-4 control-label' %>
             <div class="col-sm-7">
-              <%= f.text_field :speciality, class:"form-control", placeholder:"Estudié la carrera de ..." %>
+              <%= f.text_field :speciality, class: 'form-control', placeholder: 'Estudié la carrera de ...' %>
             </div>
           </div>
           <div class="form-group">
-            <%= f.label :job, "Ocupación: ", class: 'col-sm-4 control-label' %>
+            <%= f.label :job, 'Ocupación: ', class: 'col-sm-4 control-label' %>
             <div class="col-sm-7">
-              <%= f.text_field :job, class:"form-control", placeholder:"Me dedico a ..." %>
+              <%= f.text_field :job, class: 'form-control', placeholder: 'Me dedico a ...' %>
             </div>
           </div>
           <div class="form-group">
-            <%= f.label :workplace, "Lugar de trabajo o estudio: ", class: 'col-sm-4 control-label' %>
+            <%= f.label :workplace, 'Lugar de trabajo o estudio: ', class: 'col-sm-4 control-label' %>
             <div class="col-sm-7">
-              <%= f.text_field :workplace, class:"form-control", placeholder:"Trabajo / estudio en ..." %>
+              <%= f.text_field :workplace, class: 'form-control', placeholder: 'Trabajo / estudio en ...' %>
             </div>
           </div>
           <div class="form-group">
-            <%= f.label :about, "Acerca de mí: ", class: 'col-sm-4 control-label' %>
+            <%= f.label :about, 'Acerca de mí: ', class: 'col-sm-4 control-label' %>
             <div class="col-sm-7">
-              <%= f.text_area :about, cols: 20, rows: 8, maxlength: 300, class: 'form-control', id: 'about_user', placeholder:"Acerca de mí" %>
+              <%= f.text_area :about, cols: 20, rows: 8, maxlength: 300, class: 'form-control', id: 'about_user', placeholder: 'Acerca de mí' %>
               <span id="wordsCounter" class="label label-info"></span>
             </div>
           </div>
         </div>
         <div class="panel-footer">
           <div class="form-group centered">
-            <%= f.submit "Guardar cambios", class: "btn btn-large btn-primary" %>
-            <%= link_to "Cancelar", @user, class:"btn btn-default" %>
+            <%= f.submit 'Guardar cambios', class: 'btn btn-large btn-primary' %>
+            <%= link_to 'Cancelar', @user, class: 'btn btn-default' %>
           </div>
         </div>
         <% end %>

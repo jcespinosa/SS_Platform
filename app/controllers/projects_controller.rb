@@ -60,7 +60,7 @@ class ProjectsController < ApplicationController
     def correct_user
       @project = current_user.projects.find_by(id: params[:id])
       if @project.nil?
-        flash[:warning] = "El proyecto no existe"
+        flash[:warning] = 'El proyecto no existe'
         redirect_to current_user if @project.nil?
       end
     end

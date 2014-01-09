@@ -7,29 +7,29 @@
   <%= form_for(@user) do |f| %>
     <%= render 'shared/error_messages', object: f.object %>
     <div class="form-group">
-      <%= f.text_field :name, class: "form-control", placeholder: "Tu nombre" %>
+      <%= f.text_field :name, class: 'form-control', placeholder: 'Tu nombre' %>
     </div>
 
     <div class="form-group">
-      <%= f.text_field :username, class: "form-control", placeholder: "Tu nombre de usuario (para iniciar sesión)" %>
+      <%= f.text_field :username, class: 'form-control', placeholder: 'Tu nombre de usuario (para iniciar sesión)' %>
     </div>
 
     <div class="form-group">
-      <%= f.email_field :email, class: "form-control", placeholder: "Tu correo electrónico" %>
+      <%= f.email_field :email, class: 'form-control', placeholder: 'Tu correo electrónico' %>
     </div>
 
     <div class="form-group">
-      <%= f.password_field :password, class: "form-control", placeholder: "Tu contraseña" %>
+      <%= f.password_field :password, class: 'form-control', placeholder: 'Tu contraseña' %>
     </div>
 
     <div class="form-group">
-      <%= f.password_field :password_confirmation, class: "form-control", placeholder: "Vuelve a escribir tu contraseña" %>
+      <%= f.password_field :password_confirmation, class: 'form-control', placeholder: 'Vuelve a escribir tu contraseña' %>
     </div>
 
   </div>
   <div class="panel-footer">
     <div class="form-group centered">
-      <%= f.submit "Crear mi cuenta", class: "btn btn-large btn-primary" %>
+      <%= f.submit 'Crear mi cuenta', class: 'btn btn-large btn-primary' %>
     </div>
   </div>
   <% end %>

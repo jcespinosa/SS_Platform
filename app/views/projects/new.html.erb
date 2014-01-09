@@ -1,11 +1,11 @@
-<% provide(:title, "Nuevo proyecto") %>
+<% provide(:title, 'Nuevo proyecto') %>
 
 <script>
   $(document).ready(function(){
-    updateWordsCounter("#project_description", 300, "#wordsCounter");
+    updateWordsCounter('#project_description', 300, '#wordsCounter');
 
-    $("#project_description").keyup(function(){
-      updateWordsCounter("#project_description", 300, "#wordsCounter");
+    $('#project_description').keyup(function(){
+      updateWordsCounter('#project_description', 300, '#wordsCounter');
       return false;
     });    
   });
@@ -18,18 +18,18 @@
         <strong>Crear nuevo proyecto</strong>
       </div>
       <div class="panel-body">
-      <%= form_for(@project, :html => { :class => "form form-horizontal"}) do |f| %>
+      <%= form_for(@project, :html => { :class => 'form form-horizontal'}) do |f| %>
         <%= render 'shared/error_messages', object: f.object %>
 
         <div class="form-group">
-          <%= f.label :name, "Nombre: ", class: 'col-sm-4 control-label' %>
+          <%= f.label :name, 'Nombre: ', class: 'col-sm-4 control-label' %>
           <div class="col-sm-7">
-            <%= f.text_field :name, class:"form-control" %>
+            <%= f.text_field :name, class: 'form-control' %>
           </div>
         </div>
 
         <div class="form-group">
-          <%= f.label :description, "Descripción: ", class: 'col-sm-4 control-label' %>
+          <%= f.label :description, 'Descripción: ', class: 'col-sm-4 control-label' %>
           <div class="col-sm-7">
             <%= f.text_area :description, cols: 20, rows: 8, maxlength: 300, class: 'form-control', id: 'project_description' %>
             <span id="wordsCounter" class="label label-info"></span>
@@ -40,7 +40,7 @@
       <div class="panel-footer">
         <div class="form-group centered">
           <%= f.submit 'Crear proyecto', class: 'btn btn-large btn-primary' %>
-          <%= link_to "Cancelar", current_user, class:"btn btn-default" %>
+          <%= link_to 'Cancelar', current_user, class: 'btn btn-default' %>
         </div>
       </div>
 

@@ -1,10 +1,10 @@
-<% provide(:title, "Mis proyectos") %>
+<% provide(:title, 'Mis proyectos') %>
 
 <script>
   function paginate(){
     var count = 0;
     var block = 1;
-    var html = "";
+    var html = '';
 
     <% if @user.projects.any? %>
     var projects = {
@@ -19,7 +19,7 @@
       <% end %>
     }
 
-    $("#myProjects").text('(' + Object.keys(projects).length + ')');
+    $('#myProjects').text('(' + Object.keys(projects).length + ')');
 
     $.each(projects, function(index, project){
       if(count == 0){
@@ -62,7 +62,7 @@
 
     <% else %>
 
-    $("#myProjects").text('(0)');
+    $('#myProjects').text('(0)');
     html += '<%= link_to new_project_path, class:"btn btn-lg btn-success" do %><span class="glyphicon glyphicon-folder-open"></span><strong>&nbsp;&nbsp;&nbsp;Crear mi primer proyecto</strong>\n<% end %>';
 
     <% end %>

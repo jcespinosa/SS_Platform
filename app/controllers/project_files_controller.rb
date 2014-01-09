@@ -10,7 +10,7 @@ class ProjectFilesController < ApplicationController
   def create
     @project_file = @project.project_files.build(new_project_file_params)
     if @project_file.save
-      @project.update_attribute(:status, "En construcción")
+      @project.update_attribute(:status, 'En construcción')
       create_file
       flash[:success] = "El archivo se cargo correctamente: #{@project_file.name}"
       redirect_to @project
@@ -58,7 +58,7 @@ class ProjectFilesController < ApplicationController
     def correct_user
       @project = current_user.projects.find_by(id: params[:project_id])
       if @project.nil?
-        flash[:warning] = "Esta acción no esta permitida"
+        flash[:warning] = 'Esta acción no esta permitida'
         redirect_to current_user if @project.nil?
       end
     end
@@ -67,7 +67,7 @@ class ProjectFilesController < ApplicationController
       @project_file = ProjectFile.find(params[:id])
       @project = current_user.projects.find_by(id: @project_file.project_id)
       if @project.nil?
-        flash[:warning] = "Esta acción no esta permitida"
+        flash[:warning] = 'Esta acción no esta permitida'
         redirect_to current_user if @project.nil?
       end
     end

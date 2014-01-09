@@ -32,15 +32,15 @@
   });
 </script>
 
-<% if @project.status == "Nuevo" %>
+<% if @project.status == 'Nuevo' %>
   <span class="label label-default">Nuevo</span>
-<% elsif @project.status == "En construcción" %>
+<% elsif @project.status == 'En construcción' %>
   <span class="label label-info">En construccion</span>
-<% elsif @project.status == "Procesando" %>
+<% elsif @project.status == 'Procesando' %>
   <span class="label label-primary">Procesando</span>
-<% elsif @project.status == "Error" %>
+<% elsif @project.status == 'Error' %>
   <span class="label label-danger">Error</span>
-<% elsif @project.status == "Terminado" %>
+<% elsif @project.status == 'Terminado' %>
   <span class="label label-success">Terminado</span>
 <% else %>
   <span class="label label-default">...</span>

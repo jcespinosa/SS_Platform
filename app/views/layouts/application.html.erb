@@ -2,8 +2,8 @@
 <html>
   <head>
     <title><%= yield(:title) %></title>
-    <%= stylesheet_link_tag "application", media: "all" %>
-    <%= javascript_include_tag "application" %>
+    <%= stylesheet_link_tag 'application', media: 'all' %>
+    <%= javascript_include_tag 'application' %>
     <%= csrf_meta_tags %>
   </head>
 
@@ -13,13 +13,13 @@
 
     <script>
       toastr.options = {
-        "positionClass": "toast-bottom-full-width",
-        "showDuration": "300",
-        "hideDuration": "1000",
-        "timeOut": "5000",
-        "extendedTimeOut": "1000",
-        "showMethod": "slideDown",
-        "hideMethod": "slideUp"
+        positionClass: 'toast-bottom-full-width',
+        showDuration: '300',
+        hideDuration: '1000',
+        timeOut: '5000',
+        extendedTimeOut: '1000',
+        showMethod: 'slideDown',
+        hideMethod: 'slideUp'
       }
       <% flash.each do |key, value| %>
       toastr.<%= key %>('<%= value %>');

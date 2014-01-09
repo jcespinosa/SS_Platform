@@ -31,10 +31,10 @@
 <div class="mainContainer container">
   <h4>
     <%= link_to current_user.email, projects_user_path(current_user) %> / <strong><%= @project.name %></strong>
-    <%= link_to @project, method: :delete, data: { confirm: "¿Estas seguro de eliminar éste proyecto?" }, :id => 'delete_project', class:"btn btn-xs btn-danger pull-right" do %>
+    <%= link_to @project, method: :delete, data: { confirm: '¿Estas seguro de eliminar éste proyecto?' }, :id => 'delete_project', class: 'btn btn-xs btn-danger pull-right' do %>
       <span class="glyphicon glyphicon-trash"></span>
     <% end %>
-    <%= link_to edit_project_path(@project), :id => 'edit_project', class:"btn btn-xs btn-default pull-right" do %>
+    <%= link_to edit_project_path(@project), :id => 'edit_project', class: 'btn btn-xs btn-default pull-right' do %>
       <span class="glyphicon glyphicon-pencil"></span>
     <% end %>
   </h4>
@@ -78,7 +78,7 @@
     </div>
     <div class="col-md-10 tab-content active">
 
-      <%= link_to upload_path(@project), class:"btn btn-sm btn-default" do %>
+      <%= link_to upload_path(@project), class: 'btn btn-sm btn-default' do %>
         <span class="glyphicon glyphicon-cloud-upload"></span>
         Subir archivo
       <% end %>
@@ -99,10 +99,10 @@
             <td><%= file.name %></td>
             <td><%= truncate(file.description, length: 50) %></td>
             <td class="centered">
-              <%= link_to edit_project_file_path(file), class:"btn btn-xs btn-default edit_file" do %>
+              <%= link_to edit_project_file_path(file), class: 'btn btn-xs btn-default edit_file' do %>
                 <span class="glyphicon glyphicon-pencil"></span>
               <% end %>
-              <%= link_to file, method: :delete, data: { confirm: "¿Estas seguro de eliminar éste archivo?" }, class:"btn btn-xs btn-danger delete_file" do %>
+              <%= link_to file, method: :delete, data: { confirm: '¿Estas seguro de eliminar éste archivo?' }, class: 'btn btn-xs btn-danger delete_file' do %>
                 <span class="glyphicon glyphicon-trash"></span>
               <% end %>
             </td>

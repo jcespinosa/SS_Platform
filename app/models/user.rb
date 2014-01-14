@@ -2,8 +2,11 @@ class User < ActiveRecord::Base
   has_many :projects, dependent: :destroy
 
   has_attached_file :attachment, 
-                    :styles => { :medium => "200x200>", :thumb => "80x80>" }, 
-                    :default_url => "/images/:style/missing.png"
+                    :styles => { 
+                      :medium => "200x200>", 
+                      :thumb => "80x80>" 
+                    }, 
+                    :url => "/public/users/:style/missing.png"
 
   before_save { self.email = email.downcase }
   before_create :create_remember_token
@@ -34,8 +37,8 @@ class User < ActiveRecord::Base
             if: :password
 
   validates_attachment :attachment,
-                       :content_type => { :content_type => "image/jpg" },
-                       :size => { :in => 0..5.megabytes }
+                       :content_type => { :content_type => ["image/jpg", "image/gif", "image/png"] },
+                       :size => { :in => 0..5.megabytes },
                        if: :attachment
 
   def User.new_token(length)

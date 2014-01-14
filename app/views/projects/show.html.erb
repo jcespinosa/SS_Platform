@@ -1,57 +1,8 @@
 <% provide(:title, @project.name) %>
 
-<script>
-  $(document).ready(function(){
-    $('a#delete_project').tooltip({
-      title: 'Eliminar proyecto',
-      placement: 'bottom',
-      trigger: 'hover'
-    });
-
-    $('a#edit_project').tooltip({
-      title: 'Editar información del proyecto',
-      placement: 'bottom',
-      trigger: 'hover'
-    });
-
-    $('a.delete_file').tooltip({
-      title: 'Eliminar archivo',
-      placement: 'bottom',
-      trigger: 'hover'
-    });
-
-    $('a.edit_file').tooltip({
-      title: 'Editar información del archivo',
-      placement: 'bottom',
-      trigger: 'hover'
-    });
-  });
-</script>
-
 <div class="mainContainer container">
-  <h4>
-    <%= link_to current_user.email, projects_user_path(current_user) %> / <strong><%= @project.name %></strong>
-    <%= link_to @project, method: :delete, data: { confirm: '¿Estas seguro de eliminar éste proyecto?' }, :id => 'delete_project', class: 'btn btn-xs btn-danger pull-right' do %>
-      <span class="glyphicon glyphicon-trash"></span>
-    <% end %>
-    <%= link_to edit_project_path(@project), :id => 'edit_project', class: 'btn btn-xs btn-default pull-right' do %>
-      <span class="glyphicon glyphicon-pencil"></span>
-    <% end %>
-  </h4>
-
-  <hr>
-
-  <p>
-    <%= truncate(@project.description, length: 100) %>
-  </p>
-
-  <hr>
-
-  <p>
-    <strong>Status: </strong><%= render 'projects/status' %>
-  </p>
-
-  <hr>
+  
+  <%= render 'projects/status' %>
 
   <div class="row">
     <div class="col-md-2" style="border-right: solid 1px #ecf0f1">
@@ -63,13 +14,13 @@
           <% end %>
         </li>
         <li>
-          <%= link_to "#" do %>
+          <%= link_to parameters_project_path do %>
             <span class="glyphicon glyphicon-tasks"></span>
             <strong>Parametros</strong>
           <% end %>
         </li>
         <li>
-          <%= link_to "#" do %>
+          <%= link_to results_project_path do %>
             <span class="glyphicon glyphicon-ok"></span>
             <strong>Resultados</strong>
           <% end %>
@@ -114,5 +65,3 @@
   </div>
   <hr/>
 </div>
-
-

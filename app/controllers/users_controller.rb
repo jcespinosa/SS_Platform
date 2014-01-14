@@ -19,7 +19,7 @@ class UsersController < ApplicationController
   end
 
   def show
-    @user = User.find(params[:id])
+    @user = find_user(params[:id])
   end
 
   def index
@@ -51,7 +51,7 @@ class UsersController < ApplicationController
   end
 
   def projects
-    @user = User.find(params[:id])
+    @user = find_user(params[:id])
     @projects = @user.projects
   end
 
@@ -65,7 +65,7 @@ class UsersController < ApplicationController
     end
 
     def correct_user
-      @user = User.find(params[:id])
+      @user = find_user(params[:id])
       redirect_to(root_url) unless current_user?(@user)
     end
 

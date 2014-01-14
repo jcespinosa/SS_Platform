@@ -48,6 +48,14 @@ class ProjectsController < ApplicationController
     redirect_to current_user
   end
 
+  def parameters
+    @project = Project.find(params[:id])
+  end
+
+  def results
+    @project = Project.find(params[:id])
+  end
+
   private
     def new_project_params
       params.require(:project).permit(:name, :description)

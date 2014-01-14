@@ -29,19 +29,66 @@
       placement: 'right',
       trigger: 'hover'
     });
+
+    $('a#delete_project').tooltip({
+      title: 'Eliminar proyecto',
+      placement: 'bottom',
+      trigger: 'hover'
+    });
+
+    $('a#edit_project').tooltip({
+      title: 'Editar información del proyecto',
+      placement: 'bottom',
+      trigger: 'hover'
+    });
+
+    $('a.delete_file').tooltip({
+      title: 'Eliminar archivo',
+      placement: 'bottom',
+      trigger: 'hover'
+    });
+
+    $('a.edit_file').tooltip({
+      title: 'Editar información del archivo',
+      placement: 'bottom',
+      trigger: 'hover'
+    });
   });
 </script>
 
-<% if @project.status == 'Nuevo' %>
-  <span class="label label-default">Nuevo</span>
-<% elsif @project.status == 'En construcción' %>
-  <span class="label label-info">En construccion</span>
-<% elsif @project.status == 'Procesando' %>
-  <span class="label label-primary">Procesando</span>
-<% elsif @project.status == 'Error' %>
-  <span class="label label-danger">Error</span>
-<% elsif @project.status == 'Terminado' %>
-  <span class="label label-success">Terminado</span>
-<% else %>
-  <span class="label label-default">...</span>
-<% end %>
+<h4>
+  <%= link_to current_user.email, projects_user_path(current_user) %> / <strong><%= @project.name %></strong>
+  <%= link_to @project, method: :delete, data: { confirm: '¿Estas seguro de eliminar éste proyecto?' }, :id => 'delete_project', class: 'btn btn-xs btn-danger pull-right' do %>
+    <span class="glyphicon glyphicon-trash"></span>
+  <% end %>
+  <%= link_to edit_project_path(@project), :id => 'edit_project', class: 'btn btn-xs btn-default pull-right' do %>
+    <span class="glyphicon glyphicon-pencil"></span>
+  <% end %>
+</h4>
+
+<hr>
+
+<p>
+  <%= truncate(@project.description, length: 100) %>
+</p>
+
+<hr>
+
+<p>
+  <strong>Status: </strong>
+  <% if @project.status == 'Nuevo' %>
+    <span class="label label-default">Nuevo</span>
+  <% elsif @project.status == 'En construcción' %>
+    <span class="label label-info">En construccion</span>
+  <% elsif @project.status == 'Procesando' %>
+    <span class="label label-primary">Procesando</span>
+  <% elsif @project.status == 'Error' %>
+    <span class="label label-danger">Error</span>
+  <% elsif @project.status == 'Terminado' %>
+    <span class="label label-success">Terminado</span>
+  <% else %>
+    <span class="label label-default">...</span>
+  <% end %>
+</p>
+
+<hr>

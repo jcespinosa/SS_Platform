@@ -5,6 +5,13 @@ SSPlatform::Application.routes.draw do
     end
   end
 
+  resources :projects do
+    member do
+      get :parameters
+      get :results
+    end
+  end
+
   resources :sessions, only: [:new, :create, :destroy]
   resources :projects, only: [:show, :edit, :new, :update, :create, :destroy]
   resources :project_files, only: [:create, :edit, :update, :destroy]
@@ -15,16 +22,13 @@ SSPlatform::Application.routes.draw do
   match '/about',   to: 'static#about',   via: 'get'
   match '/contact', to: 'static#contact', via: 'get'
 
-  match '/signup', to: 'users#new', via: 'get'
+  match '/signup',     to: 'users#new',   via: 'get'
+  match '/users/:id',  to: 'users#show',  via: 'get'  
 
   match '/signin',  to: 'sessions#new',     via: 'get'
   match '/signout', to: 'sessions#destroy', via: 'delete'
 
   match '/upload/:project_id', to: 'project_files#new', via: 'get', as: 'upload'
-
-  #get 'static/home'
-  #get 'static/help'
-  #get 'static/about'
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

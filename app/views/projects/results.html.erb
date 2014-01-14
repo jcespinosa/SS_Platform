@@ -1,0 +1,36 @@
+<% provide(:title, @project.name) %>
+
+<div class="mainContainer container">
+
+  <%= render 'projects/status' %>
+
+  <div class="row">
+    <div class="col-md-2" style="border-right: solid 1px #ecf0f1">
+      <ul class="nav nav-pills nav-stacked">
+        <li>
+          <%= link_to @project do %>
+            <span class="glyphicon glyphicon-folder-open"></span>
+            <strong>Archivos</strong>
+          <% end %>
+        </li>
+        <li>
+          <%= link_to parameters_project_path do %>
+            <span class="glyphicon glyphicon-tasks"></span>
+            <strong>Parametros</strong>
+          <% end %>
+        </li>
+        <li class="active">
+          <%= link_to results_project_path do %>
+            <span class="glyphicon glyphicon-ok"></span>
+            <strong>Resultados</strong>
+          <% end %>
+        </li>
+      </ul>
+    </div>
+    <div class="col-md-10 tab-content active">
+    </div>
+  </div>
+  <hr/>
+</div>
+
+

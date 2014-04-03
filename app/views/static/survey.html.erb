@@ -1,19 +1,19 @@
 <script>
 	$(document).ready(function(){
-		updateWordsCounter("#comments", 200,"#wordsCounter1");
-		updateWordsCounter("#userCase", 600, "#wordsCounter2");
+		updateWordsCounter('#comments', 200,'#wordsCounter1');
+		updateWordsCounter('#userCase', 600, '#wordsCounter2');
 
-		$("#comments").keyup(function(){
-			updateWordsCounter("#comments", 200,"#wordsCounter1");
+		$('#comments').keyup(function(){
+			updateWordsCounter('#comments', 200,'#wordsCounter1');
 			return false;
 		});
 
-		$("#userCase").keyup(function(){
-			updateWordsCounter("#userCase", 600, "#wordsCounter2");
+		$('#userCase').keyup(function(){
+			updateWordsCounter('#userCase', 600, '#wordsCounter2');
 			return false;
 		});
 
-		var validation = $("#mySurvey").validate({
+		var validation = $('#mySurvey').validate({
 			rules: {
         nombre: {
           minlength: 3,
@@ -49,21 +49,21 @@
 				}
 			},
 			messages: {
-        lugar: "Requerido",
-        ocupacion: "Requerido",
-        correo: "Requerido",
-        casos: "Selecciona una opci&oacute;n",
-				intereses: "Selecciona una opci&oacute;n",
-				casoDeUso: "M&iacute;nimo 100 caracteres",
-				comentarios: "M&iacute;nimo 10 caracteres"
+        lugar: 'Requerido',
+        ocupacion: 'Requerido',
+        correo: 'Requerido',
+        casos: 'Selecciona una opci&oacute;n',
+				intereses: 'Selecciona una opci&oacute;n',
+				casoDeUso: 'M&iacute;nimo 100 caracteres',
+				comentarios: 'M&iacute;nimo 10 caracteres'
 			},
 
 			errorPlacement: function(error, element) {
-				if (element.attr("name") == "casos") {
-					error.insertAfter("#errorCases");
+				if (element.attr('name') == 'casos') {
+					error.insertAfter('#errorCases');
 				}
-				else if (element.attr("name") == "intereses") {
-					error.insertAfter("#errorInterests");
+				else if (element.attr('name') == 'intereses') {
+					error.insertAfter('#errorInterests');
 				}
 				else {
 					error.insertAfter(element);
@@ -81,11 +81,11 @@
 			},
 		});
 
-		$("#sendSurvey").click(function(){
+		$('#sendSurvey').click(function(){
 			validation.form();
 			if(validation.numberOfInvalids() == 0){
-				$("#formContainer").fadeOut('fast', function(){
-      		$("#sending").fadeIn();
+				$('#formContainer').fadeOut('fast', function(){
+      		$('#sending').fadeIn();
     		});
     		setTimeout(function(){
 					ajaxSubmit();

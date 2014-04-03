@@ -1,11 +1,11 @@
 <script>
 	$(document).ready(function(){
-		loadCase("case1");
+		loadCase('case1');
 		
-		$(".loadCase").click(function(){
-			var id = $(this).attr("id");
-			$(".panel-heading").html("<strong>" + $(this).text() + "</strong>");
-			if($(this).parent().hasClass("active") == false){
+		$('.loadCase').click(function(){
+			var id = $(this).attr('id');
+			$('.panel-heading').html('<strong>' + $(this).text() + '</strong>');
+			if($(this).parent().hasClass('active') == false){
 				loadCase(id);
 			}
 			return false;

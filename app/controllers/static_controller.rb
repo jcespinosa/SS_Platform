@@ -3,9 +3,9 @@ class StaticController < ApplicationController
     @user = User.new
   end
 
-  def help
+  def userCases
   end
 
-  def about
+  def survey
   end
 end

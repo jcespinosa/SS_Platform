@@ -56,6 +56,33 @@ ul {
   margin-right: 5px;
 }
 
+.carousel-control {
+  width: 10%;
+}
+
+.carousel-indicators {
+  bottom: -5px;
+}
+
+.carousel-indicators li {
+  width: 15px;
+  height: 15px;
+  background-color: #c0c0c0;
+  border: 1px solid #000000;
+}
+
+.carousel-indicators .active {
+  width: 15px;
+  height: 15px;
+  background-color: #000000;
+  border: 1px solid #000000;
+}
+
+.item {
+  padding-top: 30px;
+  min-height: 450px;
+}
+
 .modal-footer{
   margin: 0;
 }
@@ -67,6 +94,7 @@ ul {
 .panel-body {
   padding: 15;
 }
+
 
 /*
  ==================================================
@@ -86,6 +114,14 @@ ul {
   min-height: 40px;
 }
 
+.form-group.error .checkbox{
+  color: #ff0039;
+}
+
+.form-group.success .checkbox{
+  color: #3fb618;
+}
+
 .justify {
   text-align: justify;
 }
@@ -94,13 +130,10 @@ ul {
   background-color: rgba(0, 0, 0, 0.7);
 }
 
-.small {
-
-}
-
 .white {
   color: #ffffff;
 }
+
 
 /*
  ==================================================
@@ -119,11 +152,25 @@ div.profileField {
   margin-top: 5px;
 }
 
+label.valid {
+  width: 24px;
+  background: url(../images/valid.png) center center no-repeat;
+  display: inline-block;
+  text-indent: -9999px;
+}
+
+label.error {
+  color: #ff0039;
+  display: inline-block;
+  padding: 0 0 0 10px;
+}
+
 ul.projects li, ul.users li {
   padding: 10px 0 10px 0;
   margin: 0;
   border-top: 1px solid #e8e8e8;
 }
+
 
 /*
  ==================================================
@@ -143,6 +190,14 @@ div#info {
 
 div#sidebar {
   border-right: 1px solid #e3e3e3
+}
+
+div#userCaseContainer {
+  padding: 0px;
+}
+
+#formContainer, #success, #sending, #error {
+  min-height: 350px;
 }
 
 ul#errors {

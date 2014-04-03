@@ -18,9 +18,8 @@ SSPlatform::Application.routes.draw do
 
   root  'static#home'
   #root 'sessions#new'
-  match '/help',    to: 'static#help',    via: 'get'
-  match '/about',   to: 'static#about',   via: 'get'
-  match '/contact', to: 'static#contact', via: 'get'
+  match '/casos',    to: 'static#userCases',    via: 'get'
+  match '/encuesta',   to: 'static#survey',   via: 'get'
 
   match '/signup',     to: 'users#new',   via: 'get'
   match '/users/:id',  to: 'users#show',  via: 'get'  

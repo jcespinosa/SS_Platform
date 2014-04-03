@@ -1,0 +1,44 @@
+<script>
+	$(document).ready(function(){
+		loadCase("case1");
+		
+		$(".loadCase").click(function(){
+			var id = $(this).attr("id");
+			$(".panel-heading").html("<strong>" + $(this).text() + "</strong>");
+			if($(this).parent().hasClass("active") == false){
+				loadCase(id);
+			}
+			return false;
+		});
+		
+		return;
+	});
+</script>
+
+<div class="container">
+	<div class="page-header">
+		<h1>Casos de uso<small> . . . </small></h1>
+	</div>
+
+	<div class="row">
+		<div class="col-md-2 col-md-offset-1 btn-group-vertical">
+			<ul class="nav nav-pills nav-stacked">
+				<li class="case active"><a class="loadCase" id="case1" href="#">Seguridad p&uacute;blica</a></li>
+				<li class="case"><a class="loadCase" id="case2" href="#">Educaci&oacute;n</a></li>
+				<li class="case"><a class="loadCase" id="case3" href="#">Salud</a></li>
+				<li class="case"><a class="loadCase" id="case4" href="#">Agricultura</a></li>
+				<li class="case"><a class="loadCase" id="case5" href="#">Marketing</a></li>
+				<li class="case"><a class="loadCase" id="case6" href="#">Finanzas</a></li>
+				<li class="case"><a class="loadCase" id="case7" href="#">Ciencia</a></li>
+				<li class="case"><a class="loadCase" id="case8" href="#">Investigaci&oacute;n</a></li>
+			</ul>
+		</div>
+		
+		<div class="col-md-9">
+			<div class="panel panel-default">
+				<div class="panel-heading"><strong>Seguridad p&uacute;blica</strong></div>
+				<div class="panel-body" id="userCaseContainer"></div>
+			</div>
+		</div>	
+	</div>
+</div>

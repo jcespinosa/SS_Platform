@@ -1,0 +1,271 @@
+<script>
+	$(document).ready(function(){
+		updateWordsCounter("#comments", 200,"#wordsCounter1");
+		updateWordsCounter("#userCase", 600, "#wordsCounter2");
+
+		$("#comments").keyup(function(){
+			updateWordsCounter("#comments", 200,"#wordsCounter1");
+			return false;
+		});
+
+		$("#userCase").keyup(function(){
+			updateWordsCounter("#userCase", 600, "#wordsCounter2");
+			return false;
+		});
+
+		var validation = $("#mySurvey").validate({
+			rules: {
+        nombre: {
+          minlength: 3,
+          required: false
+        },
+        lugar: {
+          minlength: 3,
+          required: true
+        },
+        ocupacion: {
+          minlength: 3,
+          required: true
+        },
+ 				casos: {
+					required: true,
+					minlength: 1				
+				},
+        correo: {
+          required: true,
+          email: true
+        },
+				casoDeUso: {
+					minlength: 100,
+					required: false
+				},
+				comentarios: {
+					minlength: 10,
+					required: false
+				},
+				intereses: {
+					required: true,
+					minlength: 1				
+				}
+			},
+			messages: {
+        lugar: "Requerido",
+        ocupacion: "Requerido",
+        correo: "Requerido",
+        casos: "Selecciona una opci&oacute;n",
+				intereses: "Selecciona una opci&oacute;n",
+				casoDeUso: "M&iacute;nimo 100 caracteres",
+				comentarios: "M&iacute;nimo 10 caracteres"
+			},
+
+			errorPlacement: function(error, element) {
+				if (element.attr("name") == "casos") {
+					error.insertAfter("#errorCases");
+				}
+				else if (element.attr("name") == "intereses") {
+					error.insertAfter("#errorInterests");
+				}
+				else {
+					error.insertAfter(element);
+				}
+			},
+
+			highlight: function(element) {
+				$(element).closest('.form-group').removeClass('success').addClass('error');
+			},
+
+			success: function(element) {
+				element
+					.text('OK!').addClass('valid')
+					.closest('.form-group').removeClass('error').addClass('success');
+			},
+		});
+
+		$("#sendSurvey").click(function(){
+			validation.form();
+			if(validation.numberOfInvalids() == 0){
+				$("#formContainer").fadeOut('fast', function(){
+      		$("#sending").fadeIn();
+    		});
+    		setTimeout(function(){
+					ajaxSubmit();
+    		}, 2000);
+			}
+			else {
+				console.log('Hay errores');
+			}
+			return false
+		});
+	});
+</script>
+
+<div class="container">
+	<div class="page-header">
+		<h1>Danos tu opini&oacute;n</h1>
+	</div>
+
+	<div id="formContainer" class="container">
+		<form id="mySurvey" role="form">
+	    <div class="form-group">
+      	<label for="name">&#191;C&oacute;mo te llamas? <small>(opcional)</small></label>
+      	<input type="text" class="form-control" name="nombre" id="name"/>
+	    </div>
+
+	    <div class="form-group"> 
+	      <label for="workplace">&#191;De d&oacute;nde nos visitas? <small>(escuela o instituci&oacute;n)</small></label>
+	      <input type="text" class="form-control" name="lugar" id="workplace"/>
+	    </div>
+
+	    <div class="form-group">
+	      <label for="job">&#191;A qu&eacute; te dedicas? <small>(trabajo, estudios, etc.)</small></label>
+	      <input type="text" class="form-control" name="ocupacion" id="job"/>
+	    </div>
+
+	    <div class="form-group">
+	      <label for="email">Correo electr&oacute;nico</label>
+	      <input type="text" class="form-control" name="correo" id="email"/>
+	    </div>
+
+	    <br/>
+
+			<div class="form-group">
+				<p><strong>&#191;Con cu&aacute;les casos de uso te sentiste identificado?</strong></p>
+				<div id="errorCases" class="row">
+					<div class="col-md-3">
+						<div class="checkbox">
+							<label><input type="checkbox" name="casos" value="1"> Caso 1 - Seguridad</label>
+						</div>
+						<div class="checkbox">
+							<label><input type="checkbox" name="casos" value="2"> Caso 2 - Educaci&oacute;n</label>
+						</div>
+						<div class="checkbox">
+							<label><input type="checkbox" name="casos" value="3"> Caso 3 - Salud</label>
+						</div>
+						<div class="checkbox">
+							<label><input type="checkbox" name="casos" value="4"> Caso 4 - Agricultura</label>
+						</div>
+					</div>
+					<div class="col-md-3">
+						<div class="checkbox">
+							<label><input type="checkbox" name="casos" value="5"> Caso 5 - Marketing</label>
+						</div>
+						<div class="checkbox">
+							<label><input type="checkbox" name="casos" value="6"> Caso 6 - Finanzas</label>
+						</div>
+						<div class="checkbox">
+							<label><input type="checkbox" name="casos" value="7"> Caso 7 - Ciencia</label>
+						</div>
+						<div class="checkbox">
+							<label><input type="checkbox" name="casos" value="8"> Caso 8 - Investigaci&oacute;n</label>
+						</div>
+					</div>
+				</div>
+			</div>	
+
+			<div class="form-group">	
+				<p><strong>Comparte con nosotros la manera en la que utilizar&iacute;as la herramienta, escribe un peque&ntilde;o caso de uso: </strong></p>
+				<textarea id="userCase" name="casoDeUso" maxlength="600" rows="10" style="min-width: 500px;"></textarea>
+				<p><span id="wordsCounter2" class="badge"></span></p>
+			</div>
+
+	    <br/>
+
+			<div class="form-group">
+				<p><strong>&Aacute;reas de inter&eacute;s</strong></p>
+				<div id="errorInterests" class="row">
+					<div class="col-md-3">
+						<div class="checkbox">
+							<label><input type="checkbox" name="intereses" value="salud"> Salud</label>
+						</div>
+						<div class="checkbox">
+							<label><input type="checkbox" name="intereses" value="educacion"> Educaci&oacute;n</label>
+						</div>
+						<div class="checkbox">
+							<label><input type="checkbox" name="intereses" value="vivienda"> Vivienda</label>
+						</div>
+						<div class="checkbox">
+							<label><input type="checkbox" name="intereses" value="finanzas"> Finanzas</label>
+						</div>
+						<div class="checkbox">
+							<label><input type="checkbox" name="intereses" value="servicios"> Servicios</label>
+						</div>
+					</div>
+					<div class="col-md-3">
+						<div class="checkbox">
+							<label><input type="checkbox" name="intereses" value="industria"> Industria</label>
+						</div>
+						<div class="checkbox">
+							<label><input type="checkbox" name="intereses" value="comercio"> Comercio</label>
+						</div>
+						<div class="checkbox">
+							<label><input type="checkbox" name="intereses" value="actividadesPrimarias"> Actividades primarias</label>
+						</div>
+						<div class="checkbox">
+							<label><input type="checkbox" name="intereses" value="educacion"> Estad&iacute;stica</label>
+						</div>
+						<div class="checkbox">
+							<label><input type="checkbox" name="intereses" value="demografia"> Demograf&iacute;a</label>
+						</div>
+					</div>
+					<div class="col-md-3">
+						<div class="checkbox">
+							<label><input type="checkbox" name="intereses" value="geografia"> Geograf&iacute;a</label>
+						</div>
+						<div class="checkbox">
+							<label><input type="checkbox" name="intereses" value="tecnologia"> Tecnolog&iacute;a</label>
+						</div>
+						<div class="checkbox">
+							<label><input type="checkbox" name="intereses" value="marketing"> Marketing/Publicidad</label>
+						</div>
+						<div class="checkbox">
+							<label><input type="checkbox" name="intereses" value="investigacion"> Proyectos de investigaci&oacute;n</label>
+						</div>
+					</div>
+				</div>
+			</div>
+
+	    <br/>
+
+			<div class="form-group">	
+				<p><strong>Comentarios, cr&iacute;ticas o sugerencias</strong></p>
+				<textarea id="comments" name="comentarios" maxlength="200" rows="5" style="min-width: 500px;"></textarea>
+				<p><span id="wordsCounter1" class="badge"></span></p>
+			</div>
+		</form>
+			<div class="form-group">
+				<button id="sendSurvey" class="btn btn-primary">Enviar</button>
+			</div>
+	</div>
+
+	<div id="sending" class="container" style="display:none;">
+		<br/>
+		<img src="./images/sending.gif"></img>
+		<h2>Enviando...</h2>
+	</div>
+
+	<div id="success" class="container" style="display:none;">
+		<div class="row">
+			<div class="col-md-1">
+				<p style="font-size:100px;">:)</p>
+			</div>
+			<div class="col-md-11">
+				<br/>
+				<h2>Gracias</h2>
+				<p>Tu opini&oacute;n es importante para nosotros.</p>
+			</div>
+		</div>
+	</div>
+
+	<div id="error" class="container" style="display:none;">
+		<div class="row">
+			<div class="col-md-1">
+				<p style="font-size:100px;">:(</p>
+			</div>
+			<div class="col-md-11">
+				<br/>
+				<h2>Algo malo ocurri&oacute;</h2>
+				<p>Hubo un error procesando la informaci&oacute;n, intentalo de nuevo.</p>
+			</div>
+		</div>
+	</div>
+</div>

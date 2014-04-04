@@ -37,6 +37,8 @@ ActiveRecord::Schema.define(version: 20140114203210) do
     t.datetime "updated_at"
   end
 
+  add_index "projects", ["user_id", "created_at"], name: "index_projects_on_user_id_and_created_at"
+
   create_table "users", force: true do |t|
     t.string   "name"
     t.string   "email"

@@ -28,6 +28,7 @@ try:
 	form = cgi.FieldStorage()
 
 	print 'Content-Type: application/json'
+	print 'Access-Control-Allow-Origin: *'
 	print "\n"
 	print "\n"
 

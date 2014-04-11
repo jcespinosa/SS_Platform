@@ -48,7 +48,9 @@ function loadCase(id){
 
 function ajaxSubmit(type){
   /*var RESPONSE = 'http://elisa.dyndns-web.com/cgi-bin/ss/response.py';*/
-  var RESPONSE = 'http://10.166.226.149/~juancarlos/cgi-bin/ss/response.py';
+  /*var RESPONSE = 'http://10.166.226.149/~juancarlos/cgi-bin/ss/response.py';*/
+  var RESPONSE = 'http://192.168.1.69/~juancarlos/cgi-bin/ss/response.py';
+
 
   try {
     var form = {
@@ -79,9 +81,11 @@ function ajaxSubmit(type){
       traditional: true,
       success: function(response){
         console.log(response);
+        /*
         $('#sending').fadeOut(function(){
           $('#success').fadeIn();
         });
+        */
       },
       error: function(xhr, status, error){
         var err = eval("(" + xhr.responseText + ")");
@@ -89,13 +93,19 @@ function ajaxSubmit(type){
         console.log(error);
         console.log(status);
         console.log(xhr);
+        /*
         $('#sending').fadeOut(function(){
           $('#error').fadeIn();
         });
+        */
       }
     });
 
     //console.log(form);
+
+    $('#sending').fadeOut(function(){
+      $('#success').fadeIn();
+    });
 
     return;
   } catch(e) {

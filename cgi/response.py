@@ -25,52 +25,54 @@ ERR = 'err.txt'
 result = {}
 
 try:
-	form = cgi.FieldStorage()
+  form = cgi.FieldStorage()
 
-	print 'Content-Type: application/json'
-	print 'Access-Control-Allow-Origin: *'
-	print "\n"
-	print "\n"
+  print 'Content-Type: application/json'
+  print 'Access-Control-Allow-Origin: *'
+  print "\n"
+  print "\n"
 
-	data = [datetime.now().strftime("%Y-%m-%d %H:%M")]
-	for key in sorted(form.keys()):
-		if(type(form[key]) == list):
-			values = form.getlist(key)
-			value = ';'.join(values)
-		else:
-			value = form[key].value
-		data.append(value)	
+  data = [datetime.now().strftime("%Y-%m-%d %H:%M")]
+  for key in sorted(form.keys()):
+    if(type(form[key]) == list):
+      values = form.getlist(key)
+      value = ';'.join(values)
+    else:
+      value = form[key].value
+    data.append(value)	
 
-	DB = 'db'
-	
-	if(not os.path.exists(DB)):
-		with open(DB, 'w') as output:
-			output.write('fecha|' + '|'.join(sorted(form.keys())) + "\n")
-		
-	with open(DB, 'a') as output:
-		output.write('|'.join(data) + "\n")
+  DB = 'db'
 
-	result = {
-		'success' : True,
-		'message' : 'La informacion ha sido recibida',
-		'keys' : sorted(form.keys()),
-		'data' : data
-	}
+  if(not os.path.exists(DB)):
+    with open(DB, 'w') as output:
+      output.write('fecha|' + '|'.join(sorted(form.keys())) + "\n")
+
+  with open(DB, 'a') as output:
+    output.write('|'.join(data) + "\n")
+
+  result = {
+    'success' : True,
+    'message' : 'La informacion ha sido recibida',
+    'keys' : sorted(form.keys()),
+    'data' : data
+  }
 
 except Exception, e:
-	if(not os.path.exists(ERR)):
-		with open(ERR, 'w') as output:
-			output.write(e + "\n")
-	else:
-		with open(ERR, 'a') as output:
-			output.write(e + "\n")
+  if(not os.path.exists(ERR)):
+    with open(ERR, 'w') as output:
+      output.write(e)
+      output.write("\n")
+  else:
+    with open(ERR, 'a') as output:
+      output.write(e)
+      output.write("\n")
 
-	result = {
-		'success' : False,
-		'message' : 'Hubo un problema procesando la informacion',
-		'keys' : '',
-		'data' : ''
-	}
+  result = {
+    'success' : False,
+    'message' : 'Hubo un problema procesando la informacion',
+    'keys' : '',
+    'data' : ''
+  }
 
 finally:
 #	sys.stdin = savein
@@ -80,6 +82,5 @@ finally:
 #	stdin.close()
 #	stdout.close()
 #	stderr.close()
-	
-	print json.dumps(result, indent=1)
-	print "\n"
+  print json.dumps(result, indent=1)
+  print "\n"

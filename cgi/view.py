@@ -3,88 +3,85 @@
 
 
 import cgi
+import traceback
 
 #SERVER = 'http://elisa.dyndns-web.com/~juancarlos/ss'
-SERVER = '../../ss'
+SERVER = 'http://192.168.1.69/~juancarlos/ss'
 
-def printDB(db):
-	DB = 'db'
+def printDB():
+  try:
+    with open('db', 'r') as input:
+      keys = list()
+      counter, count = 1, 0
+      for a, line in enumerate(input):
+        data = dict()
 
-	try:
-		with open(DB, 'r') as input:
-			keys = list()
-			counter, count = 1, 0
-			for a, line in enumerate(input):
-				data = dict()
+        if(a == 0):
+          keys = line.rstrip("\n").split('|')
+        else:
+          line = line.rstrip("\n").split('|')
+          if(len(line) < 2):
+            print '</div>'
+            return counter
+          for a, key in enumerate(keys):
+            data[key] = line[a]
 
-				if(a == 0):
-					keys = line.rstrip("\n").split('|')
-				else:
-					line = line.rstrip("\n").split('|')
-					for a, key in enumerate(keys):
-						data[key] = line[a]
+          if(count == 0):
+            print '<div class="block" id="block' + str(counter) + '" style="display:none;">'
 
-					if(count == 0):
-						print '<div class="block" id="block' + str(counter) + '" style="display:none;">'
+          print '  <div class="row">'            
+          print '    <div class="well col-md-5">'
+          print '      <table>'
+          print '        <tr><td class="myLabel">Fecha: </td><td>' + data['fecha'] + '</td></tr>'
+          print '        <tr><td class="myLabel">Nombre: </td><td>' + data['nombre'] + '</td></tr>'
+          print '        <tr><td class="myLabel">Ocupacion: </td><td>' + data['ocupacion'] + '</td></tr>'
+          print '        <tr><td class="myLabel">Lugar: </td><td>' + data['lugar'] + '</td></tr>'
+          print '        <tr><td class="myLabel">Correo: </td><td>' + data['correo'] + '</td></tr>'
+          print '        <tr><td class="myLabel">Intereses: </td><td>' + data['intereses'].replace(';', ', ') + '</td></tr>'
+          print '        <tr><td class="myLabel">Casos: </td><td>' + data['casos'].replace(';', ', ') + '</td></tr>'
+          print '        <tr><td class="myLabel">Comentario: </td><td>' + data['comentarios'] + '</td></tr>'
+          print '      </table>'
+          print '    </div>'
+          print '    <div class="well col-md-offset-1 col-md-6">'
+          print '      <p><strong>Caso de uso</strong></p>'
+          print '      <p>' + data['caso'] + '</p>'
+          print '    </div>'
+          print '  </div>'
 
-					print '  <div class="well">'
-					print '    <table>'
-					print '      <tr><td class="myLabel">Fecha: </td><td>' + data['fecha'] + '</td></tr>'
-					print '      <tr><td class="myLabel">Nombre: </td><td>' + data['nombre'] + '</td></tr>'
-					print '      <tr><td class="myLabel">Ocupacion: </td><td>' + data['ocupacion'] + '</td></tr>'
-					print '      <tr><td class="myLabel">Lugar: </td><td>' + data['lugar'] + '</td></tr>'
-					print '      <tr><td class="myLabel">Correo: </td><td>' + data['correo'] + '</td></tr>'
+          count += 1
 
-					if(db == 'survey'):
-						print '      <tr><td class="myLabel">Intereses: </td><td>' + data['intereses'].replace(';', ', ') + '</td></tr>'
-						print '      <tr><td class="myLabel">Casos: </td><td>' + data['casos'].replace(';', ', ') + '</td></tr>'
-						print '      <tr><td class="myLabel">Comentario: </td><td>' + data['comentarios'] + '</td></tr>'
-						
-					elif(db == 'userCase'):
-						print '      <tr><td class="myLabel">Caso: </td><td>' + data['caso'] + '</td></tr>'
+          if(count == 10):
+            print '</div>'
+            count = 0
+            counter += 1
+            
+  except Exception, e:
+    print '<div class="jumbotron centered">'
+    print '  <p>Nada</p>'
+    counter = 0
 
-					print '    </table>'
-					print '  </div>'
-
-					count += 1
-
-					if(count == 10):
-						print '</div>'
-						count = 0
-						counter += 1
-						
-	except:
-		print '<div class="jumbotron centered">'
-		print '  <p>Nada</p>'
-		counter = 0
-
-	print '</div>'
-	return counter
+  print '</div>'
+  return counter
 
 def printPagination(pages):
-	if(pages > 0):
-		print '<div class="centered">'
-		print '  <ul class="pagination">'
-		#print '    <li><a href="#">Prev</a></li>'
+  if(pages > 0):
+    print '<div class="centered">'
+    print '  <ul class="pagination">'
+    #print '    <li><a href="#">Prev</a></li>'
 
-		for i in range(pages):
-			classes = 'pages page' + str(i+1)
-			if(i == 0):
-				classes = 'pages page' + str(i+1) + ' active'
-			print '    <li class="' + classes + '"><a class="page" id="' + str(i+1) + '" href="#">' + str(i+1) + '</a></li>'
+    for i in range(pages):
+      classes = 'pages page' + str(i+1)
+      if(i == 0):
+        classes = 'pages page' + str(i+1) + ' active'
+      print '    <li class="' + classes + '"><a class="page" id="' + str(i+1) + '" href="#">' + str(i+1) + '</a></li>'
 
-		#print '    <li><a href="#">Next</a></li>'
-		print '  </ul>'
-		print '</div>'
+    #print '    <li><a href="#">Next</a></li>'
+    print '  </ul>'
+    print '</div>'
 
-	return
+  return
 
-args = cgi.FieldStorage()
-DB = args['db'].value
-
-STRING = 'Comentarios' if(DB == 'survey') else 'Casos de uso'
-
-print 'Content-Type: text/html'
+print 'Content-Type: text/html' + "\n\n"
 print '<html>'
 print '  <head>'
 print '    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">'
@@ -124,11 +121,11 @@ print '    </div>'
 
 print '    <div class="container">'
 print '      <div class="page-header">'
-print '        <h1>' + STRING + '</h1>'
+print '        <h1>Encuestas</h1>'
 print '      </div>'
 print '      <div class="container">'
 
-pages = printDB(DB)
+pages = printDB()
 
 print '      </div>'
 

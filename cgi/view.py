@@ -1,12 +1,10 @@
 #!/usr/bin/python
-#C:\Program Files (x86)\Python26\python.exe
-
 
 import cgi
 import traceback
 
 #SERVER = 'http://elisa.dyndns-web.com/~juancarlos/ss'
-SERVER = 'http://192.168.1.69/~juancarlos/ss'
+SERVER = 'http://0.0.0.0:3000/assets'
 
 def printDB():
   try:
@@ -89,12 +87,12 @@ print '    <meta name="viewport" content="width=device-width, initial-scale=1.0"
 
 print '    <title>Proyecto</title>'
 
-#print '    <link href="' + SERVER + '/bootstrap/css/bootstrap.css" rel="stylesheet" media="screen">'
-print '    <link href="' + SERVER + '/css/bootstrap_flaty.min.css" rel="stylesheet" media="screen">'
-print '    <link href="' + SERVER + '/css/style.css" rel="stylesheet" media="screen">'
+#print '    <link href="' + SERVER + '/bootstrap.css" rel="stylesheet" media="screen">'
+print '    <link href="' + SERVER + '/bootstrap_flaty.min.css" rel="stylesheet" media="screen">'
+print '    <link href="' + SERVER + '/style.css" rel="stylesheet" media="screen">'
 
-print '    <script src="' + SERVER + '/js/jquery/jquery.js"></script>'
-print '    <script src="' + SERVER + '/js/events.js"></script>'
+print '    <script src="' + SERVER + '/jquery.js"></script>'
+print '    <script src="' + SERVER + '/events.js"></script>'
 print '    <script>'
 print '      $(document).ready(function(){'
 print '        pagination("1");'
@@ -143,7 +141,7 @@ print '        </footer>'
 print '      </div>'
 print '    </div>'
    
-print '    <script src="' + SERVER + '/bootstrap/js/bootstrap.min.js"></script>'
+print '    <script src="' + SERVER + '/bootstrap.min.js"></script>'
 
 print '  </body>'
 print '</html>'

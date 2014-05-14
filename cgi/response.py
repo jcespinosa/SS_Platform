@@ -1,6 +1,4 @@
 #!/usr/bin/python
-#C:\Program Files (x86)\Python26\python.exe
-
 
 import os
 import json

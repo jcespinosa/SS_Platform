@@ -3,9 +3,9 @@ namespace :db do
   task populate: :environment do
     User.create!(name: 'Juan Carlos Espinosa Ceniceros',
                  username: 'jcespinosa',
-                 email: 'juan@mail.com',
-                 password: 'abc_123',
-                 password_confirmation: 'abc_123',
+                 email: 'JuanC.Espinosa@non.schneider-electric.com',
+                 password: 'abcd_1234',
+                 password_confirmation: 'abcd_1234',
                  admin: true)
 
     10.times do |n|
@@ -20,12 +20,12 @@ namespace :db do
                    password_confirmation: password)
     end
 
-    users = User.all(limit: 5)
-    10.times do
-      name = Faker::Lorem.sentence(1)
-      description = Faker::Lorem.sentence(5)
-      users.each { |user| user.projects.create!(name: name, description: description) }
-    end
+    #users = User.all(limit: 5)
+    #10.times do
+    #  name = Faker::Lorem.sentence(1)
+    #  description = Faker::Lorem.sentence(5)
+    #  users.each { |user| user.projects.create!(name: name, description: description) }
+    #end
 
   end
 end
